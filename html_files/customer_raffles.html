@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eastern Beaver Sneaker Boutique</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <h1>Eastern Beaver Sneaker Boutique</h1>
+    <nav>
+        <a href="index.html">Main</a>
+        <a href="customers.html">Customers</a>
+        <a href="sneakers.html">Sneakers</a>
+        <a href="orders.html">Orders</a>
+        <a href="raffles.html">Raffles</a>
+        <a href="drawings.html">Drawings</a>
+        <a href="sneaker_orders.html">Sneaker Orders</a>
+        <a href="raffle_orders.html">Raffle Orders</a>
+        <a href="customer_raffles.html">Customer Raffles</a>
+    </nav>
+    <h2>Customer Raffles</h2>
+    <p><strong>Manage Customer Raffle History</strong></p>
+    <button onclick="showAddForm()">Add New Customer Raffle Entry</button>
+    <form action="customer_raffles.html" method="POST" class="addForm" style="display: none">
+        <legend>
+            <strong>Add Customer Raffle</strong>
+        </legend>
+        <fieldset>
+            <label for="crRaffleID">Raffle ID</label>
+            <select name="crRaffleID" id="crRaffleID">
+                <option value="blank"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select required>
+            <label for="crCustomerID">Customer ID</label>
+            <select name="crCustomerID" id="crCustomerID">
+                <option value="blank"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select required>
+            <label for="crWonRaffle">Won Raffle</label>
+            <select name="crWonRaffle" id="crWonRaffle">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select required>
+            <br>
+            <br>
+            <button type="submit">Add Customer Raffle</button>
+			<button onclick="hideAddForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="customer_raffles.html" class="updateForm" style="display: none">
+        <legend>
+            <strong>Update Customer Raffle</strong>
+        </legend>
+        <fieldset>
+            <label for="crIDUpdate">Customer Raffle ID</label>
+            <span>1</span>
+            <label for="crRaffleIDUpdate">Raffle ID</label>
+            <select name="crRaffleIDUpdate" id="crRaffleIDUpdate">
+                <option value="1">1</option>
+            </select required>
+            <label for="crCustomerIDUpdate">Customer ID</label>
+            <select name="crCustomerIDUpdate" id="crCustomerIDUpdate">
+                <option value="3">3</option>
+            </select required>
+            <label for="crWonRaffleUpdate">Won Raffle</label>
+            <select name="crWonRaffleUpdate" id="crWonRaffleUpdate">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select required>
+            <br>
+            <br>
+            <button type="submit">Update Customer Raffle</button>
+			<button onclick="hideUpdateForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="customer_raffles.html" class="deleteForm" style="display: none">
+        <legend>
+            <strong>Delete Customer Raffle</strong>
+        </legend>
+        <fieldset>
+            <label for="crIDDelete"><u>Customer Raffle ID</u></label>
+            <span>1</span>
+            <br>
+            <br>
+            <button type="submit">Delete Customer Raffle</button>
+			<button onclick="hideDeleteForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer Raffle ID</th>
+                <th>Raffle ID</th>
+                <th>Customer ID</th>
+                <th>Won Raffle</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>Yes</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+                <td>Yes</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>3</td>
+                <td>1</td>
+                <td>Yes</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
