@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eastern Beaver Sneaker Boutique</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <h1>Eastern Beaver Sneaker Boutique</h1>
+    <nav>
+        <a href="index.html">Main</a>
+        <a href="customers.html">Customers</a>
+        <a href="sneakers.html">Sneakers</a>
+        <a href="orders.html">Orders</a>
+        <a href="raffles.html">Raffles</a>
+        <a href="drawings.html">Drawings</a>
+        <a href="sneaker_orders.html">Sneaker Orders</a>
+        <a href="raffle_orders.html">Raffle Orders</a>
+        <a href="customer_raffles.html">Customer Raffles</a>
+    </nav>
+    <h2>Sneakers</h2>
+    <p><strong>Browse All Sneakers</strong></p>
+    <button onclick="showAddForm()">Add New Sneaker Entry</button>
+    <form action="sneakers.html" method="POST" class="addForm" style="display: none">
+        <legend>
+            <strong>Add Sneaker</strong>
+        </legend>
+        <fieldset>
+            <label for="sneakerBrand">Brand</label>
+            <input type="text" name="sneakerBrand" required>
+            <label for="sneakerModel">Model Name</label>
+            <input type="text" name="sneakerModel" required>
+            <label for="sneakerSize">Size</label>
+            <input type="number" name="sneakerSize" required>
+            <label for="sneakerColorway">Colorway</label>
+            <input type="text" name="sneakerColorway" required>
+            <label for="sneakerPrice">Price</label>
+            <input type="number" name="sneakerPrice" required step="0.01">
+            <label for="sneakerStock">Stock Count</label>
+            <input type="number" name="sneakerStock" required>
+            <br>
+            <br>
+            <button type="submit">Add Sneaker</button>
+			<button onclick="hideAddForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="sneakers.html" class="updateForm" style="display: none">
+        <legend>
+            <strong>Update Sneaker</strong>
+        </legend>
+        <fieldset>
+            <label for="sneakerIDUpdate">Sneaker ID</label>
+            <span>1</span>
+            <label for="sneakerBrandUpdate">Brand</label>
+            <input type="text" name="sneakerBrandUpdate" value="Nike" required>
+            <label for="sneakerModelUpdate" >Model Name</label>
+            <input type="text" name="sneakerModelUpdate" value='Nike Air Yeezy 2 "Red October"' required>
+            <label for="sneakerSizeUpdate">Size</label>
+            <input type="number" name="sneakerSizeUpdate" value="10" required>
+            <label for="sneakerColorwayUpdate">Colorway</label>
+            <input type="text" name="sneakerColorwayUpdate" value="Red" required>
+            <label for="sneakerPriceUpdate">Price</label>
+            <input type="number" name="sneakerPriceUpdate" value="250.00" required>
+            <label for="sneakerStockUpdate">Stock Count</label>
+            <input type="number" name="sneakerStockUpdate" value="1" required>
+            <br>
+            <br>
+            <button type="submit">Update Sneaker</button>
+			<button onclick="hideUpdateForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="sneakers.html" class="deleteForm" style="display: none">
+        <legend>
+            <strong>Delete Sneaker</strong>
+        </legend>
+        <fieldset>
+            <label for="sneakerIDDelete"><u>Sneaker ID</u></label>
+            <span>1</span>
+            <label for="sneakerModelDelete"><u>Model Name</u></label>
+            <span>Nike Air Yeezy 2 "Red October"</span>
+            <br>
+            <br>
+            <button type="submit">Delete Sneaker</button>
+			<button onclick="hideDeleteForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <table>
+         <thead>
+            <tr>
+                <th>Sneaker ID</th>
+                <th>Brand</th>
+                <th>Model Name</th>
+                <th>Size</th>
+                <th>Colorway</th>
+                <th>Price</th>
+                <th>Stock Count</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+                <td>1</td>
+                <td>Nike</td>
+                <td>Nike Air Yeezy 2 "Red October"</td>
+                <td>10</td>
+                <td>Red</td>
+                <td>250</td>
+                <td>1</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Nike</td>
+                <td>Nike SB Dunk Low "Ben & Jerry Chunky Dunky"</td>
+                <td>8</td>
+                <td>White/Lagoon Pulse/Black/University Gold</td>
+                <td>100</td>
+                <td>1</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Jordan</td>
+                <td>Off-White x Jordan Retro 4 Sail</td>
+                <td>7</td>
+                <td>Sail/Muslin/White/Black</td>
+                <td>200</td>
+                <td>1</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Adidas</td>
+                <td>Y-3 Superstar</td>
+                <td>9</td>
+                <td>Core White/Talc/Black</td>
+                <td>350</td>
+                <td>10</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Adidas</td>
+                <td>Y-3 Stan Smith</td>
+                <td>11</td>
+                <td>Off White/Off White/Off White</td>
+                <td>350</td>
+                <td>10</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+         </tbody>
+    </table>
+</body>
+</html>
