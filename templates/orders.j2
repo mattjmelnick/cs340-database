@@ -1,0 +1,144 @@
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eastern Beaver Sneaker Boutique</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+    <script src="./static/js/main.js"></script>
+</head>
+<body>
+    <h1>Eastern Beaver Sneaker Boutique</h1>
+    <nav>
+        <a href="/">Main</a>
+        <a href="customers">Customers</a>
+        <a href="sneakers">Sneakers</a>
+        <a href="orders">Orders</a>
+        <a href="raffles">Raffles</a>
+        <a href="drawings">Drawings</a>
+        <a href="sneaker_orders">Sneaker Orders</a>
+        <a href="raffle_orders">Raffle Orders</a>
+        <a href="customer_raffles">Customer Raffles</a>
+    </nav>
+    <h2>Orders</h2>
+    <p><strong>View Order History</strong></p>
+    <button onclick="showAddForm()">Add New Order Entry</button>
+    <form action="orders.html" method="POST" class="addForm" style="display: none">
+        <legend>
+            <strong>Add Order</strong>
+        </legend>
+        <fieldset>
+            <label for="orderCustomerID">Customer</label>
+            <select name="orderCustomerID" id="orderCustomerID">
+                <option value="blank"></option>
+                <option value="1">Jonah Hill</option>
+                <option value="2">Will Ferrell</option>
+                <option value="3">Dave Chappelle</option>
+            </select>
+            <label for="orderDate">Purchase Date</label>
+            <input type="date" name="orderDate" required>
+            <label for="orderPrice">Total Price</label>
+            <input type="number" name="orderPrice" required>
+            <label for="orderEnteredRaffle">Entered Raffle</label>
+            <select name="orderEnteredRaffle" id="orderEnteredRaffle">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select required>
+            <br>
+            <br>
+            <button type="submit">Add Order</button>
+			<button onclick="hideAddForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="orders.html" class="updateForm" style="display: none">
+        <legend>
+            <strong>Update Order</strong>
+        </legend>
+        <fieldset>
+            <label for="orderIDUpdate">Order ID</label>
+            <span>1</span>
+            <label for="orderCustomerIDUpdate">Customer ID</label>
+            <select name="orderCustomerIDUPdate" id="orderCustomerIDUPdate">
+                <option value="1">1</option>
+            </select required>
+            <label for="orderDateUpdate">Purchase Date</label>
+            <input type="date" name="orderDateUpdate" value="2025-06-13" required>
+            <label for="orderPriceUpdate">Total Price</label>
+            <input type="number" name="orderPriceUpdate" step="0.01" value="620.00" required>
+            <label for="orderEnteredRaffleUpdate">Entered Raffle</label>
+            <select name="orderEnteredRaffleUpdate" id="orderEnteredRaffleUpdate">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select required>
+            <br>
+            <br>
+            <button type="submit">Update Order</button>
+			<button onclick="hideUpdateForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="orders.html" class="deleteForm" style="display: none">
+        <legend>
+            <strong>Delete Order</strong>
+        </legend>
+        <fieldset>
+            <label for="orderIDDelete"><u>Order ID</u></label>
+            <span>1</span>
+            <br>
+            <br>
+            <button type="submit">Delete Order</button>
+			<button onclick="hideDeleteForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer ID</th>
+                <th>Purchase Date</th>
+                <th>Total Price</th>
+                <th>Entered Raffle</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>06-13-2025</td>
+                <td>620.00</td>
+                <td>Yes</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>06-13-2025</td>
+                <td>350.00</td>
+                <td>No</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2</td>
+                <td>05-17-2025</td>
+                <td>970.00</td>
+                <td>Yes</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>3</td>
+                <td>04-12-2025</td>
+                <td>270.00</td>
+                <td>Yes</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

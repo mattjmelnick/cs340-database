@@ -1,0 +1,36 @@
+body {
+    background-color: antiquewhite;
+}
+
+a {
+    padding: 5px;
+}
+
+table, fieldset {
+    background-color: floralwhite;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+tbody, thead, th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+label {
+    display: block;
+}
+
+fieldset {
+    margin-bottom: 10px;
+    width: 250px;
+}
+
+form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

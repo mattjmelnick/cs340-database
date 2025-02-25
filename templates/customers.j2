@@ -1,0 +1,116 @@
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eastern Beaver Sneaker Boutique</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+    <script src="./static/js/main.js"></script>
+</head>
+<body>
+    <h1>Eastern Beaver Sneaker Boutique</h1>
+    <nav>
+        <a href="/">Main</a>
+        <a href="customers">Customers</a>
+        <a href="sneakers">Sneakers</a>
+        <a href="orders">Orders</a>
+        <a href="raffles">Raffles</a>
+        <a href="drawings">Drawings</a>
+        <a href="sneaker_orders">Sneaker Orders</a>
+        <a href="raffle_orders">Raffle Orders</a>
+        <a href="customer_raffles">Customer Raffles</a>
+    </nav>
+    <h2>Customers</h2>
+    <p><strong>View Existing Customers</strong></p>
+    <button onclick="showAddForm()">Add New Customer Entry</button>
+    <form action="customers" method="POST" class="addForm" style="display: none">
+        <legend>
+            <strong>Add Customer</strong>
+        </legend>
+        <fieldset>
+            <label for="customerName">Name</label>
+            <input type="text" name="customerName" required>
+            <label for="customerEmail">Email</label>
+            <input type="text" name="customerEmail" required>
+            <label for="customerName">Phone Number <br> (###-###-####)</label>
+            <input type="tel" name="customerPhone" required>
+            <br>
+            <br>
+            <button type="submit">Add Customer</button>
+			<button onclick="hideAddForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="customers" class="updateForm" style="display: none">
+        <legend>
+            <strong>Update Customer</strong>
+        </legend>
+        <fieldset>
+            <label for="customerIDUpdate">Customer ID</label>
+            <span>1</span>
+            <label for="customerNameUpdate">Name</label>
+            <input type="text" name="customerNameUpdate" value="Jonah Hill" required>
+            <label for="customerEmailUpdate">Email</label>
+            <input type="text" name="customerEmailUpdate" value="21Jumpstreet@blockbuster.com" required>
+            <label for="customerPhoneUpdate">Phone Number <br> ###-###-####</label>
+            <input type="tel" name="customerPhoneUpdate" value="323-999-9999" required>
+            <br>
+            <br>
+            <button type="submit">Update Customer</button>
+			<button onclick="hideUpdateForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="customers" class="deleteForm" style="display: none">
+        <legend>
+            <strong>Delete Customer</strong>
+        </legend>
+        <fieldset>
+            <label for="customerIDDelete"><u>Customer ID</u></label>
+            <span>1</span>
+            <label for="customerNameDelete"><u>Customer Name</u></label>
+            <span>Jonah Hill</span>
+            <br>
+            <br>
+            <button type="submit">Delete Customer</button>
+			<button onclick="hideDeleteForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <table>
+         <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+                <td>1</td>
+                <td>Jonah Hill</td>
+                <td>21JumpStreet@blockbuster.com</td>
+                <td>323-999-9999</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Will Ferrell</td>
+                <td>THEAnchorman@blockbuster.com</td>
+                <td>949-999-9999</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Dave Chappelle</td>
+                <td>HalfBaked@blockbuster.com</td>
+                <td>202-999-9999</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+         </tbody>
+    </table>
+</body>
+</html>

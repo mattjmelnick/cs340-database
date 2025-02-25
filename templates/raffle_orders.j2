@@ -1,0 +1,123 @@
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eastern Beaver Sneaker Boutique</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+    <script src="./static/js/main.js"></script>
+</head>
+<body>
+    <h1>Eastern Beaver Sneaker Boutique</h1>
+    <nav>
+        <a href="/">Main</a>
+        <a href="customers">Customers</a>
+        <a href="sneakers">Sneakers</a>
+        <a href="orders">Orders</a>
+        <a href="raffles">Raffles</a>
+        <a href="drawings">Drawings</a>
+        <a href="sneaker_orders">Sneaker Orders</a>
+        <a href="raffle_orders">Raffle Orders</a>
+        <a href="customer_raffles">Customer Raffles</a>
+    </nav>
+    <h2>Raffle Orders</h2>
+    <p><strong>Manage Raffle Order Transactions</strong></p>
+    <button onclick="showAddForm()">Add New Raffle Order Entry</button>
+    <form action="raffle_orders.html" method="POST" class="addForm" style="display: none">
+        <legend>
+            <strong>Add Raffle Order</strong>
+        </legend>
+        <fieldset>
+            <label for="roOrderID">Order ID</label>
+            <select name="roOrderID" id="roOrderID">
+                <option value="blank"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <label for="roRaffleID">Raffle ID</label>
+            <select name="roRaffleID" id="roRaffleID">
+                <option value="blank"></option>
+                <option value="null">NULL</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <br>
+            <br>
+            <button type="submit">Add Raffle Order</button>
+			<button onclick="hideAddForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="raffle_orders.html" class="updateForm" style="display: none">
+        <legend>
+            <strong>Update Raffle Order</strong>
+        </legend>
+        <fieldset>
+            <label for="roIDUpdate">Raffle Order ID</label>
+            <span>1</span>
+            <label for="roOrderIDUpdate">Order ID</label>
+            <select name="roOrderIDUpdate" id="roOrderIDUpdate">
+                <option value="4">4</option>
+            </select required>
+            <label for="roRaffleIDUpdate">Raffle ID</label>
+            <select name="roRaffleIDUpdate" id="roRaffleIDUpdate">
+                <option value="null">NULL</option>
+                <option value="1" selected>1</option>
+            </select required>
+            <br>
+            <br>
+            <button type="submit">Update Raffle Order</button>
+			<button onclick="hideUpdateForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <form action="raffle_orders.html" class="deleteForm" style="display: none">
+        <legend>
+            <strong>Delete Raffle Order</strong>
+        </legend>
+        <fieldset>
+            <label for="roIDDelete"><u>Raffle Order ID</u></label>
+            <span>1</span>
+            <br>
+            <br>
+            <button type="submit">Delete Raffle Order</button>
+			<button onclick="hideDeleteForm()">Cancel</button>
+        </fieldset>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Raffle Order ID</th>
+                <th>Order ID</th>
+                <th>Raffle ID</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>4</td>
+                <td>1</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>3</td>
+                <td>2</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>1</td>
+                <td>3</td>
+                <td><button onclick="showUpdateForm()">Edit</button></td>
+                <td><button onclick="showDeleteForm()">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
