@@ -22,67 +22,61 @@
     </nav>
     <h2>Raffle Orders</h2>
     <p><strong>Manage Raffle Order Transactions</strong></p>
-    <button onclick="showAddForm()">Add New Raffle Order Entry</button>
-    <form action="raffle_orders.html" method="POST" class="addForm" style="display: none">
+    <button onclick="showAddForm('#raffleOrderAddForm')">Add New Raffle Order Entry</button>
+    <form action="raffle_orders" method="POST" id="raffleOrderAddForm" style="display: none">
         <legend>
             <strong>Add Raffle Order</strong>
         </legend>
         <fieldset>
             <label for="roOrderID">Order ID</label>
             <select name="roOrderID" id="roOrderID">
-                <option value="blank"></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+				{% for order in order_ids %}
+                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }}</option>
+				{% endfor %}
             </select>
             <label for="roRaffleID">Raffle ID</label>
             <select name="roRaffleID" id="roRaffleID">
-                <option value="blank"></option>
-                <option value="null">NULL</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option value="0">NULL</option>
+				{% for raffle in raffle_ids %}
+                	<option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_id'] }}</option>
+				{% endfor %}
             </select>
             <br>
             <br>
             <button type="submit">Add Raffle Order</button>
-			<button onclick="hideAddForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#raffleOrderAddForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="raffle_orders.html" class="updateForm" style="display: none">
+    <form id="raffleOrderUpdateForm" method="POST" style="display: none">
         <legend>
             <strong>Update Raffle Order</strong>
         </legend>
         <fieldset>
             <label for="roIDUpdate">Raffle Order ID</label>
-            <span>1</span>
+            <span id="roIDUpdate"></span>
             <label for="roOrderIDUpdate">Order ID</label>
             <select name="roOrderIDUpdate" id="roOrderIDUpdate">
-                <option value="4">4</option>
             </select required>
             <label for="roRaffleIDUpdate">Raffle ID</label>
             <select name="roRaffleIDUpdate" id="roRaffleIDUpdate">
-                <option value="null">NULL</option>
-                <option value="1" selected>1</option>
             </select required>
             <br>
             <br>
             <button type="submit">Update Raffle Order</button>
-			<button onclick="hideUpdateForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#raffleOrderUpdateForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="raffle_orders.html" class="deleteForm" style="display: none">
+    <form id="raffleOrderDeleteForm" method="POST" style="display: none">
         <legend>
             <strong>Delete Raffle Order</strong>
         </legend>
         <fieldset>
             <label for="roIDDelete"><u>Raffle Order ID</u></label>
-            <span>1</span>
+            <span id="roIDDelete"></span>
             <br>
             <br>
             <button type="submit">Delete Raffle Order</button>
-			<button onclick="hideDeleteForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#raffleOrderDeleteForm')">Cancel</button>
         </fieldset>
     </form>
     <table>
@@ -96,27 +90,21 @@
             </tr>
         </thead>
         <tbody>
+			{% for raffle_order in raffle_orders %}
             <tr>
-                <td>1</td>
-                <td>4</td>
-                <td>1</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
+                <td>{{ raffle_order.raffle_order_id }}</td>
+                <td>{{ raffle_order.order_id }}</td>
+                <td>{{ raffle_order.raffle_id }}</td>
+                <td><button onclick="showROUpdate(
+					'{{ raffle_order['raffle_order_id'] }}',
+					'{{ raffle_order['order_id'] }}',
+					'{{ raffle_order['raffle_id'] }}',
+					{{ order_ids }},
+					{{ raffle_ids }})">Edit</button></td>
+                <td><button onclick="showRODelete(
+					'{{ raffle_order['raffle_order_id'] }}')">Delete</button></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>3</td>
-                <td>2</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>1</td>
-                <td>3</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
+			{% endfor %}
         </tbody>
     </table>
 </body>
