@@ -1,44 +1,88 @@
 function cancelForm(formName) {
-	// use a switch statement to select each form to hide based on the input parameter
-	// this prevents redundant functions being created
-	switch(formName) {
-		case "customerAddForm":
-			document.querySelector("#customerAddForm").reset();
-			document.querySelector("#customerAddForm").style.display = "none";
-			break;
-		case "customerUpdateForm":
-			document.querySelector("#customerUpdateForm").reset();
-			document.querySelector("#customerUpdateForm").style.display = "none";
-			break;
-		case "customerDeleteForm":
-			document.querySelector("#customerDeleteForm").reset();
-			document.querySelector("#customerDeleteForm").style.display = "none";
-			break;
-	}
+		document.querySelector(formName).reset();
+		document.querySelector(formName).style.display = "none";
 }
 
-function showCustomerAdd() {
-	document.querySelector("#customerAddForm").style.display = "block";
+function showAddForm(formName) {
+	document.querySelector(formName).style.display = "block";
 }
 
 function showCustomerUpdate(id, name, email, phone) {
-	let updateForm = document.getElementById("customerUpdateForm");
-	updateForm.action = `/edit_customer/${id}`;
+	let customerUpdateForm = document.getElementById("customerUpdateForm");
+	customerUpdateForm.action = `/edit_customer/${id}`;
 
 	document.getElementById("customerIDUpdate").textContent = id;
 	document.querySelector("input[name='customerNameUpdate']").value = name;
 	document.querySelector("input[name='customerEmailUpdate']").value = email;
 	document.querySelector("input[name='customerPhoneUpdate']").value = phone;
 
-	document.querySelector("#customerUpdateForm").style.display = "block";
+	customerUpdateForm.style.display = "block";
 }
 
 function showCustomerDelete(id, name) {
-	let deleteForm = document.getElementById("customerDeleteForm");
-	deleteForm.action = `/delete_customer/${id}`;
+	let customerDeleteForm = document.getElementById("customerDeleteForm");
+	customerDeleteForm.action = `/delete_customer/${id}`;
 
 	document.getElementById("customerIDDelete").textContent = id;
 	document.getElementById("customerNameDelete").textContent = name;
 
-	document.querySelector("#customerDeleteForm").style.display = "block";
+	customerDeleteForm.style.display = "block";
+}
+
+function showROUpdate(id, order_id, raffle_id, order_ids, raffle_ids) {
+	let roUpdateForm = document.getElementById("raffleOrderUpdateForm");
+	roUpdateForm.action = `/edit_raffle_order/${id}`;
+
+	document.getElementById("roIDUpdate").textContent = id;
+
+	// create dropdown list for order ids
+	let roOrderIDDropdown = document.getElementById("roOrderIDUpdate");
+	// clear the options to prevent redundancy
+	roOrderIDDropdown.options.length = 0;
+
+	// iterate through the order_ids array of objects and create options
+	order_ids.forEach(order => {
+		let orderOption = document.createElement("option");
+		orderOption.value = order.order_id.toString();
+		orderOption.text = order.order_id.toString();
+		// pre-select the row's raffle_id
+		if (order.order_id.toString() === order_id) {
+			orderOption.selected = true;
+		}
+		roOrderIDDropdown.appendChild(orderOption);
+	});
+
+	// create dropdown list for raffle ids
+	let roRaffleIDDropdown = document.getElementById("roRaffleIDUpdate");
+	// clear the options to prevent redundancy
+	roRaffleIDDropdown.options.length = 0;
+
+	const nullOption = document.createElement("option");
+	nullOption.value = "0";
+	nullOption.text = "NULL";
+
+	roRaffleIDDropdown.appendChild(nullOption);
+
+	// iterate through the raffle_ids array of objects and create options
+	raffle_ids.forEach(raffle => {
+		let raffleOption = document.createElement("option");
+		raffleOption.value = raffle.raffle_id.toString(); 
+		raffleOption.text = raffle.raffle_id.toString();
+		// pre-select the row's raffle_id
+		if (raffle.raffle_id.toString() === raffle_id) {
+			raffleOption.selected = true;
+		}
+		roRaffleIDDropdown.appendChild(raffleOption);
+	});
+
+	roUpdateForm.style.display = "block";
+}
+
+function showRODelete(id) {
+	let roDeleteForm = document.getElementById("raffleOrderDeleteForm");
+	roDeleteForm.action = `/delete_raffle_order/${id}`;
+
+	document.getElementById("roIDDelete").textContent = id;
+
+	roDeleteForm.style.display = "block";
 }
