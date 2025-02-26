@@ -62,8 +62,7 @@ CREATE TABLE Orders(
     purchase_date DATE NOT NULL,
     total_price DECIMAL(9,2) NOT NULL,
     entered_raffle TINYINT(1) NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
-    ON DELETE RESTRICT ON UPDATE CASCADE
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Creates SneakerOrders Intersection Table
