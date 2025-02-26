@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eastern Beaver Sneaker Boutique</title>
     <link rel="stylesheet" href="./static/css/style.css">
-    <script src="./static/js/main.js"></script>
 </head>
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
@@ -22,8 +21,9 @@
     </nav>
     <h2>Customers</h2>
     <p><strong>View Existing Customers</strong></p>
-    <button onclick="showAddForm()">Add New Customer Entry</button>
-    <form action="customers" method="POST" class="addForm" style="display: none">
+    <button onclick="showCustomerAdd()">Add New Customer Entry</button>
+	<!-- Add a new Customer to the database -->
+    <form action="customers" method="POST" id="customerAddForm" style="display: none">
         <legend>
             <strong>Add Customer</strong>
         </legend>
@@ -36,42 +36,44 @@
             <input type="tel" name="customerPhone" required>
             <br>
             <br>
-            <button type="submit">Add Customer</button>
-			<button onclick="hideAddForm()">Cancel</button>
+            <button type="submit" name="addCustomerBtn">Add Customer</button>
+			<button type="button" onclick="cancelForm('customerAddForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="customers" class="updateForm" style="display: none">
+	<!-- Update a Customer in the database -->
+    <form method="POST" id="customerUpdateForm" style="display: none">
         <legend>
             <strong>Update Customer</strong>
         </legend>
         <fieldset>
             <label for="customerIDUpdate">Customer ID</label>
-            <span>1</span>
+            <span id="customerIDUpdate"></span>
             <label for="customerNameUpdate">Name</label>
-            <input type="text" name="customerNameUpdate" value="Jonah Hill" required>
+            <input type="text" name="customerNameUpdate" value="" required>
             <label for="customerEmailUpdate">Email</label>
-            <input type="text" name="customerEmailUpdate" value="21Jumpstreet@blockbuster.com" required>
+            <input type="text" name="customerEmailUpdate" value="" required>
             <label for="customerPhoneUpdate">Phone Number <br> ###-###-####</label>
-            <input type="tel" name="customerPhoneUpdate" value="323-999-9999" required>
+            <input type="tel" name="customerPhoneUpdate" value="" required>
             <br>
             <br>
             <button type="submit">Update Customer</button>
-			<button onclick="hideUpdateForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('customerUpdateForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="customers" class="deleteForm" style="display: none">
+	<!-- Delete a Customer from the database -->
+    <form method="POST" id="customerDeleteForm" style="display: none">
         <legend>
             <strong>Delete Customer</strong>
         </legend>
         <fieldset>
             <label for="customerIDDelete"><u>Customer ID</u></label>
-            <span>1</span>
+            <span id="customerIDDelete"></span>
             <label for="customerNameDelete"><u>Customer Name</u></label>
-            <span>Jonah Hill</span>
+            <span id="customerNameDelete"></span>
             <br>
             <br>
             <button type="submit">Delete Customer</button>
-			<button onclick="hideDeleteForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('customerDeleteForm')">Cancel</button>
         </fieldset>
     </form>
     <table>
@@ -86,31 +88,31 @@
             </tr>
          </thead>
          <tbody>
-            <tr>
-                <td>1</td>
-                <td>Jonah Hill</td>
-                <td>21JumpStreet@blockbuster.com</td>
-                <td>323-999-9999</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Will Ferrell</td>
-                <td>THEAnchorman@blockbuster.com</td>
-                <td>949-999-9999</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Dave Chappelle</td>
-                <td>HalfBaked@blockbuster.com</td>
-                <td>202-999-9999</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
+		  		<!-- access the dictionary data passed from app.py -->
+		  		<!-- iterate through the list of dictionaries -->
+				{% for person in customers %}
+            	<tr>
+		  			<!-- place each column value in table cells -->
+					<td>{{ person.customer_id }}</td>
+					<td>{{ person.name}}</td>
+					<td>{{ person.email}}</td>
+					<td>{{ person.phone_number }}</td>
+
+		  			<!-- pass the variable values to the edit form when the edit button is clicked -->
+                	<td><button onclick="showCustomerUpdate(
+						'{{ person['customer_id'] }}',
+						'{{ person['name'] }}',
+						'{{ person['email'] }}',
+						'{{ person['phone_number'] }}')">Edit</button></td>
+
+		  			<!-- pass the id and name values to the delete form when the delete button is clicked -->
+                	<td><button onclick="showCustomerDelete(
+						'{{ person['customer_id'] }}',
+						'{{ person['name'] }}')">Delete</button></td>
+            	</tr>
+				{% endfor %}
          </tbody>
     </table>
 </body>
+<script src="./static/js/main.js"></script>
 </html>
