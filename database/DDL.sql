@@ -30,7 +30,7 @@ CREATE TABLE Sneakers(
 -- Creates Raffles Table
 CREATE TABLE Raffles(
     raffle_id INT AUTO_INCREMENT PRIMARY KEY,
-    sneaker_id INT,
+    sneaker_id INT NOT NULL,
     raffle_description TEXT NOT NULL UNIQUE,
     entry_cost DECIMAL(5,2) NOT NULL,
     FOREIGN KEY (sneaker_id) REFERENCES Sneakers(sneaker_id) ON DELETE CASCADE ON UPDATE CASCADE
