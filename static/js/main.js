@@ -1,41 +1,44 @@
-function showAddForm() {
-	const addForm = document.querySelector(".addForm");
-    addForm.style.display = "block";
+function cancelForm(formName) {
+	// use a switch statement to select each form to hide based on the input parameter
+	// this prevents redundant functions being created
+	switch(formName) {
+		case "customerAddForm":
+			document.querySelector("#customerAddForm").reset();
+			document.querySelector("#customerAddForm").style.display = "none";
+			break;
+		case "customerUpdateForm":
+			document.querySelector("#customerUpdateForm").reset();
+			document.querySelector("#customerUpdateForm").style.display = "none";
+			break;
+		case "customerDeleteForm":
+			document.querySelector("#customerDeleteForm").reset();
+			document.querySelector("#customerDeleteForm").style.display = "none";
+			break;
+	}
 }
 
-function hideAddForm() {
-	const addForm = document.querySelector(".addForm");
-	let requiredFields = addForm.querySelectorAll("[required]");
-	requiredFields.forEach((field) => {
-		field.removeAttribute("required");
-	});
-	addForm.style.display = "none";
+function showCustomerAdd() {
+	document.querySelector("#customerAddForm").style.display = "block";
 }
 
-function showUpdateForm() {
-    const updateForm = document.querySelector(".updateForm");
-    updateForm.style.display = "block";
+function showCustomerUpdate(id, name, email, phone) {
+	let updateForm = document.getElementById("customerUpdateForm");
+	updateForm.action = `/edit_customer/${id}`;
+
+	document.getElementById("customerIDUpdate").textContent = id;
+	document.querySelector("input[name='customerNameUpdate']").value = name;
+	document.querySelector("input[name='customerEmailUpdate']").value = email;
+	document.querySelector("input[name='customerPhoneUpdate']").value = phone;
+
+	document.querySelector("#customerUpdateForm").style.display = "block";
 }
 
-function hideUpdateForm() {
-    const updateForm = document.querySelector(".updateForm");
-	let requiredFields = updateForm.querySelectorAll("[required]");
-	requiredFields.forEach((field) => {
-		field.removeAttribute("required");
-	});
-	updateForm.style.display = "none";
-}
+function showCustomerDelete(id, name) {
+	let deleteForm = document.getElementById("customerDeleteForm");
+	deleteForm.action = `/delete_customer/${id}`;
 
-function showDeleteForm() {
-    const deleteForm = document.querySelector(".deleteForm");
-    deleteForm.style.display = "block";
-}
+	document.getElementById("customerIDDelete").textContent = id;
+	document.getElementById("customerNameDelete").textContent = name;
 
-function hideDeleteForm() {
-    const deleteForm = document.querySelector(".deleteForm");
-	let requiredFields = deleteForm.querySelectorAll("[required]");
-	requiredFields.forEach((field) => {
-		field.removeAttribute("required");
-	});
-	deleteForm.style.display = "none";
+	document.querySelector("#customerDeleteForm").style.display = "block";
 }
