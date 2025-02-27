@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, json
+from flask import Blueprint, render_template, request, redirect, url_for
 import database.db_connector as db
 
 raffle_orders_bp = Blueprint('raffle_orders', __name__)

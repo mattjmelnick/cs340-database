@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, json
+from flask import Blueprint, render_template, request, redirect, url_for
 import database.db_connector as db
 
 customers_bp = Blueprint('customers', __name__)
@@ -19,8 +19,6 @@ def customers():
         query = "SELECT * FROM Customers"
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
-        # results = json.dumps(cursor.fetchall())
-        # results = json.loads(results)
 
         return render_template("customers.j2", customers=results)
 
