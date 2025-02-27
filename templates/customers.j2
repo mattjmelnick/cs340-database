@@ -21,8 +21,8 @@
     </nav>
     <h2>Customers</h2>
     <p><strong>View Existing Customers</strong></p>
-    <button onclick="showAddForm('#customerAddForm')">Add New Customer Entry</button>
 	<!-- Add a new Customer to the database -->
+    <button onclick="showAddForm('#customerAddForm')">Add New Customer Entry</button>
     <form action="customers" method="POST" id="customerAddForm" style="display: none">
         <legend>
             <strong>Add Customer</strong>
@@ -88,6 +88,7 @@
             </tr>
          </thead>
          <tbody>
+		 		<!-- The for loop code is based on the CS 340 Flask Starter App -->
 		  		<!-- access the dictionary data passed from app.py -->
 		  		<!-- iterate through the list of dictionaries -->
 				{% for person in customers %}
@@ -98,6 +99,7 @@
 					<td>{{ person.email}}</td>
 					<td>{{ person.phone_number }}</td>
 
+	   				<!-- The JavaScript function implementations are original -->
 		  			<!-- pass the variable values to the edit form when the edit button is clicked -->
                 	<td><button onclick="showCustomerUpdate(
 						'{{ person['customer_id'] }}',

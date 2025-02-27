@@ -2,6 +2,14 @@ import MySQLdb
 import os
 from dotenv import load_dotenv, find_dotenv
 
+"""
+Citation for this file:
+Date: 2/25/25
+Copied and modified from:
+https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/database/db_connector.py
+"""
+
+
 # Load the .env file into the environment variables
 load_dotenv(find_dotenv())
 
