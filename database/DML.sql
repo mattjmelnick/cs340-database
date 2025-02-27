@@ -1,4 +1,6 @@
--- Data manipulation queries for Step 3
+-- Amity Hill, Matthew Melnick
+-- Eastern Beavers (Group 15)
+-- Updated Data Manipulation Queries for Step 4
 -- Variables that are used to pass data from the backend are denoted with '~' in front of them
 
 -- get the customer IDs, names, email addresses, and phone numbers from the Customers table
