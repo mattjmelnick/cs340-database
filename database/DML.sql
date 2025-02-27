@@ -1,8 +1,8 @@
 -- Data manipulation queries for Step 3
 -- Variables that are used to pass data from the backend are denoted with '~' in front of them
 
--- get the customer IDs and names from the Customers table
-select customer_id, name
+-- get the customer IDs, names, email addresses, and phone numbers from the Customers table
+select *
 from Customers;
 
 -- get data for a sneaker for the Update Sneaker form
@@ -90,7 +90,12 @@ set customer_id = ~customer_id_from_dropdown_input, purchase_date = ~purchase_da
 
 -- update raffle and order data
 update RaffleOrders
-set order_id = ~order_id_from_dropdown_input, raffle_id = ~raffle_id_from_dropdown_input;
+set order_id = ~order_id_from_dropdown_input, raffle_id = ~raffle_id_from_dropdown_input
+where raffle_order_id = ~raffle_order_id_passed_from_form;
+
+-- delete a raffle order entry
+delete from RaffleOrders
+where raffle_order_id = ~raffle_order_id_passed_from_form;
 
 -- delete a sneaker
 delete from Sneakers
