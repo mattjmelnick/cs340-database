@@ -69,7 +69,7 @@
 			<button type="button" onclick="cancelForm('#raffleOrderUpdateForm')">Cancel</button>
         </fieldset>
     </form>
-	<!-- Delete a RaffleOrder in the database -->
+	<!-- Delete a RaffleOrder from the database -->
     <form id="raffleOrderDeleteForm" method="POST" style="display: none">
         <legend>
             <strong>Delete Raffle Order</strong>
@@ -101,11 +101,12 @@
                 <td>{{ raffle_order.raffle_id }}</td>
 	   			<!-- The JavaScript function implementations are original -->
                 <td><button onclick="showROUpdate(
-					'{{ raffle_order['raffle_order_id'] }}',
-					'{{ raffle_order['order_id'] }}',
-					'{{ raffle_order['raffle_id'] }}',
+                    '{{ raffle_order['raffle_order_id'] }}',
+                    '{{ raffle_order['order_id'] }}',
+                    '{{ raffle_order['raffle_id'] }}',
 					{{ order_ids }},
 					{{ raffle_ids }})">Edit</button></td>
+                <!-- pass the raffle_order object to the delete form -->
                 <td><button onclick="showRODelete(
 					'{{ raffle_order['raffle_order_id'] }}')">Delete</button></td>
             </tr>

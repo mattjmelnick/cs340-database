@@ -22,8 +22,9 @@
     </nav>
     <h2>Sneakers</h2>
     <p><strong>Browse All Sneakers</strong></p>
-    <button onclick="showAddForm()">Add New Sneaker Entry</button>
-    <form action="sneakers.html" method="POST" class="addForm" style="display: none">
+    <!-- Add a new Sneaker to the database -->
+    <button onclick="showAddForm('#sneakerAddForm')">Add New Sneaker Entry</button>
+    <form action="sneakers" method="POST" id="sneakerAddForm" style="display: none">
         <legend>
             <strong>Add Sneaker</strong>
         </legend>
@@ -43,51 +44,53 @@
             <br>
             <br>
             <button type="submit">Add Sneaker</button>
-			<button onclick="hideAddForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#sneakerAddForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="sneakers.html" class="updateForm" style="display: none">
+    <!-- Update a Sneaker in the database -->
+    <form method="POST" id="sneakerUpdateForm" style="display: none">
         <legend>
             <strong>Update Sneaker</strong>
         </legend>
         <fieldset>
             <label for="sneakerIDUpdate">Sneaker ID</label>
-            <span>1</span>
+            <span id="sneakerIDUpdate"></span>
             <label for="sneakerBrandUpdate">Brand</label>
-            <input type="text" name="sneakerBrandUpdate" value="Nike" required>
+            <input type="text" name="sneakerBrandUpdate" value="" required>
             <label for="sneakerModelUpdate" >Model Name</label>
-            <input type="text" name="sneakerModelUpdate" value='Nike Air Yeezy 2 "Red October"' required>
+            <input type="text" name="sneakerModelUpdate" value="" required>
             <label for="sneakerSizeUpdate">Size</label>
-            <input type="number" name="sneakerSizeUpdate" value="10" required>
+            <input type="number" name="sneakerSizeUpdate" value="" required>
             <label for="sneakerColorwayUpdate">Colorway</label>
-            <input type="text" name="sneakerColorwayUpdate" value="Red" required>
+            <input type="text" name="sneakerColorwayUpdate" value="" required>
             <label for="sneakerPriceUpdate">Price</label>
-            <input type="number" name="sneakerPriceUpdate" value="250.00" required>
+            <input type="number" name="sneakerPriceUpdate" value="" required>
             <label for="sneakerStockUpdate">Stock Count</label>
-            <input type="number" name="sneakerStockUpdate" value="1" required>
+            <input type="number" name="sneakerStockUpdate" value="" required>
             <br>
             <br>
             <button type="submit">Update Sneaker</button>
-			<button onclick="hideUpdateForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#sneakerUpdateForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="sneakers.html" class="deleteForm" style="display: none">
+    <!-- Delete a Sneaker from the database -->
+    <form method="POST" id="sneakerDeleteForm" style="display: none">
         <legend>
             <strong>Delete Sneaker</strong>
         </legend>
         <fieldset>
             <label for="sneakerIDDelete"><u>Sneaker ID</u></label>
-            <span>1</span>
+            <span id="sneakerIDDelete"></span>
             <label for="sneakerModelDelete"><u>Model Name</u></label>
-            <span>Nike Air Yeezy 2 "Red October"</span>
+            <span id="sneakerModelDelete"></span>
             <br>
             <br>
             <button type="submit">Delete Sneaker</button>
-			<button onclick="hideDeleteForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#sneakerDeleteForm')">Cancel</button>
         </fieldset>
-    </form>
+    </form> 
     <table>
-         <thead>
+        <thead>
             <tr>
                 <th>Sneaker ID</th>
                 <th>Brand</th>
@@ -99,63 +102,28 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-         </thead>
-         <tbody>
+        </thead>
+        <tbody>
+		 	<!-- The for loop code is based on the CS 340 Flask Starter App -->
+            <!-- access the dictionary data passed from the sneaker blueprint -->
+		  	<!-- iterate through the list of dictionaries -->
+            {% for sneaker in sneakers %}
             <tr>
-                <td>1</td>
-                <td>Nike</td>
-                <td>Nike Air Yeezy 2 "Red October"</td>
-                <td>10</td>
-                <td>Red</td>
-                <td>250</td>
-                <td>1</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
+		  		<!-- place each column value in table cells -->
+                <td>{{ sneaker.sneaker_id }}</td>
+                <td>{{ sneaker.brand }}</td>
+                <td>{{ sneaker.model_name }}</td>
+                <td>{{ sneaker.size }}</td>
+                <td>{{ sneaker.colorway }}</td>
+                <td>{{ sneaker.price }}</td>
+                <td>{{ sneaker.stock_count }}</td>
+	   			<!-- The JavaScript function implementations are original -->
+                <!-- pass the sneaker object to the edit form -->
+                <td><button onclick='showSneakerUpdate({{ sneaker | tojson }})'>Edit</button></td>
+		  		<!-- pass the sneaker object to the delete form -->
+                <td><button onclick='showSneakerDelete({{ sneaker | tojson }})'>Delete</button></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Nike</td>
-                <td>Nike SB Dunk Low "Ben & Jerry Chunky Dunky"</td>
-                <td>8</td>
-                <td>White/Lagoon Pulse/Black/University Gold</td>
-                <td>100</td>
-                <td>1</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Jordan</td>
-                <td>Off-White x Jordan Retro 4 Sail</td>
-                <td>7</td>
-                <td>Sail/Muslin/White/Black</td>
-                <td>200</td>
-                <td>1</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Adidas</td>
-                <td>Y-3 Superstar</td>
-                <td>9</td>
-                <td>Core White/Talc/Black</td>
-                <td>350</td>
-                <td>10</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Adidas</td>
-                <td>Y-3 Stan Smith</td>
-                <td>11</td>
-                <td>Off White/Off White/Off White</td>
-                <td>350</td>
-                <td>10</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
+            {% endfor %}
          </tbody>
     </table>
 </body>

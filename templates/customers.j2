@@ -34,10 +34,10 @@
             <label for="customerEmail">Email</label>
             <input type="text" name="customerEmail" required>
             <label for="customerName">Phone Number <br> (###-###-####)</label>
-            <input type="tel" name="customerPhone" required>
+            <input type="tel" name="customerPhone" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
             <br>
             <br>
-            <button type="submit" name="addCustomerBtn">Add Customer</button>
+            <button type="submit">Add Customer</button>
 			<button type="button" onclick="cancelForm('#customerAddForm')">Cancel</button>
         </fieldset>
     </form>
@@ -90,28 +90,22 @@
          </thead>
          <tbody>
 		 		<!-- The for loop code is based on the CS 340 Flask Starter App -->
-		  		<!-- access the dictionary data passed from app.py -->
+		  		<!-- access the dictionary data passed from the customer blueprint -->
 		  		<!-- iterate through the list of dictionaries -->
-				{% for person in customers %}
+				{% for customer in customers %}
             	<tr>
 		  			<!-- place each column value in table cells -->
-					<td>{{ person.customer_id }}</td>
-					<td>{{ person.name}}</td>
-					<td>{{ person.email}}</td>
-					<td>{{ person.phone_number }}</td>
+					<td>{{ customer.customer_id }}</td>
+					<td>{{ customer.name}}</td>
+					<td>{{ customer.email}}</td>
+					<td>{{ customer.phone_number }}</td>
 
 	   				<!-- The JavaScript function implementations are original -->
-		  			<!-- pass the variable values to the edit form when the edit button is clicked -->
-                	<td><button onclick="showCustomerUpdate(
-						'{{ person['customer_id'] }}',
-						'{{ person['name'] }}',
-						'{{ person['email'] }}',
-						'{{ person['phone_number'] }}')">Edit</button></td>
+		  			<!-- pass the customer object to the edit form -->
+                	<td><button onclick="showCustomerUpdate({{ customer }})">Edit</button></td>
 
-		  			<!-- pass the id and name values to the delete form when the delete button is clicked -->
-                	<td><button onclick="showCustomerDelete(
-						'{{ person['customer_id'] }}',
-						'{{ person['name'] }}')">Delete</button></td>
+		  			<!-- pass the customer object to the delete form -->
+                	<td><button onclick="showCustomerDelete({{ customer }})">Delete</button></td>
             	</tr>
 				{% endfor %}
          </tbody>
