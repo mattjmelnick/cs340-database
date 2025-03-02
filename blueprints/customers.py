@@ -13,8 +13,8 @@ def customers():
             email = request.form.get("customerEmail")
             phone = request.form.get("customerPhone")
             # add the new customer to the database
-            query = f"INSERT INTO Customers (name, email, phone_number) VALUES ('{name}', '{email}', '{phone}')"
-            db.execute_query(db_connection=db_connection, query=query)
+            query = "INSERT INTO Customers (name, email, phone_number) VALUES (%s, %s, %s)"
+            db.execute_query(db_connection=db_connection, query=query, query_params=(name, email, phone))
 
             # return to customers page
             return redirect(url_for('customers.customers'))
@@ -38,9 +38,9 @@ def edit_customer(customer_id):
         email = request.form.get("customerEmailUpdate")
         phone = request.form.get("customerPhoneUpdate")
         # update the customer in the database using the input data
-        query = f"UPDATE Customers SET name = '{name}', email = '{email}',\
-            phone_number = '{phone}' WHERE customer_id = {customer_id}"
-        db.execute_query(db_connection=db_connection, query=query)
+        query = """UPDATE Customers SET name = %s, email = %s,
+            phone_number = %s WHERE customer_id = %s"""
+        db.execute_query(db_connection=db_connection, query=query, query_params=(name, email, phone, customer_id))
 
         # return to customers page
         return redirect(url_for('customers.customers'))
