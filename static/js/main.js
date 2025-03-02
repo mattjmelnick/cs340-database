@@ -7,29 +7,29 @@ function showAddForm(formName) {
 	document.querySelector(formName).style.display = "block";
 }
 
-function showCustomerUpdate(id, name, email, phone) {
+function showCustomerUpdate(customer) {
 	// set the update form's action to pass the row's customer_id
 	let customerUpdateForm = document.getElementById("customerUpdateForm");
-	customerUpdateForm.action = `/edit_customer/${id}`;
+	customerUpdateForm.action = `/edit_customer/${customer.customer_id}`;
 
 	// set the form text to the column row values
-	document.getElementById("customerIDUpdate").textContent = id;
-	document.querySelector("input[name='customerNameUpdate']").value = name;
-	document.querySelector("input[name='customerEmailUpdate']").value = email;
-	document.querySelector("input[name='customerPhoneUpdate']").value = phone;
+	document.getElementById("customerIDUpdate").textContent = customer.customer_id;
+	document.querySelector("input[name='customerNameUpdate']").value = customer.name;
+	document.querySelector("input[name='customerEmailUpdate']").value = customer.email;
+	document.querySelector("input[name='customerPhoneUpdate']").value = customer.phone_number;
 
 	// show the form
 	customerUpdateForm.style.display = "block";
 }
 
-function showCustomerDelete(id, name) {
+function showCustomerDelete(customer) {
 	// set the delete form's action to pass the row's customer_id
 	let customerDeleteForm = document.getElementById("customerDeleteForm");
-	customerDeleteForm.action = `/delete_customer/${id}`;
+	customerDeleteForm.action = `/delete_customer/${customer.customer_id}`;
 
 	// set the form text to the customer_id and name
-	document.getElementById("customerIDDelete").textContent = id;
-	document.getElementById("customerNameDelete").textContent = name;
+	document.getElementById("customerIDDelete").textContent = customer.customer_id;
+	document.getElementById("customerNameDelete").textContent = customer.name;
 
 	// show the form
 	customerDeleteForm.style.display = "block";
@@ -99,4 +99,36 @@ function showRODelete(id) {
 
 	// show the form
 	roDeleteForm.style.display = "block";
+}
+
+function showSneakerUpdate(sneaker) {
+    // set the delete form's action to pass the row's sneaker_id
+    let sneakerUpdateForm = document.getElementById("sneakerUpdateForm");
+    sneakerUpdateForm.action = `/edit_sneaker/${sneaker.sneaker_id}`;
+
+    // set the form's input values to the row's values
+    document.getElementById("sneakerIDUpdate").textContent = sneaker.sneaker_id;
+	document.querySelector("input[name='sneakerBrandUpdate']").value = sneaker.brand;
+	document.querySelector("input[name='sneakerModelUpdate']").value = sneaker.model_name;
+	document.querySelector("input[name='sneakerSizeUpdate']").value = sneaker.size;
+	document.querySelector("input[name='sneakerColorwayUpdate']").value = sneaker.colorway;
+	document.querySelector("input[name='sneakerPriceUpdate']").value = sneaker.price;
+	document.querySelector("input[name='sneakerStockUpdate']").value = sneaker.stock_count;
+    console.log(document.querySelector("input[name='sneakerModelUpdate']").value);
+
+    // show the form
+    sneakerUpdateForm.style.display = "block";
+}
+
+function showSneakerDelete(sneaker) {
+    // set the delete form's action to pass the row's sneaker_id
+    let sneakerDeleteForm = document.getElementById("sneakerDeleteForm");
+    sneakerDeleteForm.action = `/delete_sneaker/${sneaker.sneaker_id}`;
+
+    // set the form text to the sneaker_id and model_name
+    document.getElementById("sneakerIDDelete").textContent = sneaker.sneaker_id;
+    document.getElementById("sneakerModelDelete").textContent = sneaker.model_name;
+    
+    // show the form
+    sneakerDeleteForm.style.display = "block";
 }
