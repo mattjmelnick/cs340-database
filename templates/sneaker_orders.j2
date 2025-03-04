@@ -6,6 +6,7 @@
     <title>Eastern Beaver Sneaker Boutique</title>
     <link rel="stylesheet" href="./static/css/style.css">
     <script src="./static/js/main.js"></script>
+    <script src="./static/js/sneaker_orders.js"></script>
 </head>
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
@@ -21,8 +22,8 @@
         <a href="customer_raffles">Customer Raffles</a>
     </nav>
     <h2>Sneaker Orders</h2>
-    <p><strong>Manage Sneaker Order Transactions</strong></p>
-    <button onclick="showAddForm()">Add New Sneaker Order Entry</button>
+    <h3><strong>Manage Sneaker Order Transactions</strong></h3>
+    <button class="addBtn" onclick="showAddForm()">Add New Sneaker Order Entry</button>
     <form action="sneaker_orders.html" method="POST" class="addForm" style="display: none">
         <legend>
             <strong>Add Sneaker Order</strong>

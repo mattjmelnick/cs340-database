@@ -6,6 +6,7 @@
     <title>Eastern Beaver Sneaker Boutique</title>
     <link rel="stylesheet" href="./static/css/style.css">
     <script src="./static/js/main.js"></script>
+    <script src="./static/js/sneakers.js"></script>
 </head>
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
@@ -21,9 +22,9 @@
         <a href="customer_raffles">Customer Raffles</a>
     </nav>
     <h2>Sneakers</h2>
-    <p><strong>Browse All Sneakers</strong></p>
+    <h3><strong>Browse All Sneakers</strong></h3>
     <!-- Add a new Sneaker to the database -->
-    <button onclick="showAddForm('#sneakerAddForm')">Add New Sneaker Entry</button>
+    <button class="addBtn" onclick="showAddForm('#sneakerAddForm')">Add New Sneaker Entry</button>
     <form action="sneakers" method="POST" id="sneakerAddForm" style="display: none">
         <legend>
             <strong>Add Sneaker</strong>

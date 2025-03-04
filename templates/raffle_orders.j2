@@ -6,6 +6,7 @@
     <title>Eastern Beaver Sneaker Boutique</title>
     <link rel="stylesheet" href="./static/css/style.css">
     <script src="./static/js/main.js"></script>
+    <script src="./static/js/raffle_orders.js"></script>
 </head>
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
@@ -21,9 +22,9 @@
         <a href="customer_raffles">Customer Raffles</a>
     </nav>
     <h2>Raffle Orders</h2>
-    <p><strong>Manage Raffle Order Transactions</strong></p>
+    <h3><strong>Manage Raffle Order Transactions</strong></h3>
 	<!-- Add a new RaffleOrder to the database -->
-    <button onclick="showAddForm('#raffleOrderAddForm')">Add New Raffle Order Entry</button>
+    <button class="addBtn" onclick="showAddForm('#raffleOrderAddForm')">Add New Raffle Order Entry</button>
     <form action="raffle_orders" method="POST" id="raffleOrderAddForm" style="display: none">
         <legend>
             <strong>Add Raffle Order</strong>
