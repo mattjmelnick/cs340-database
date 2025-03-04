@@ -7,14 +7,13 @@
 select *
 from Customers;
 
--- get data for a sneaker for the Update Sneaker form
+-- get sneaker attributes from the Sneakers table
 select *
-from Sneakers
-where sneaker_id = ~sneaker_id_from_browse_sneaker_page;
-
--- get the sneaker brands to populate a dropdown when inserting or updating the Sneakers table
-select brand 
 from Sneakers;
+
+-- get raffle order attributes from the RaffleOrders table
+select *
+from RaffleOrders;
 
 -- get the sneaker name, raffle description, and draw date from the Sneakers, Raffles, and Drawings tables
 select Sneakers.name, Raffles.raffle_description, Drawings.draw_date
@@ -82,9 +81,23 @@ values (~order_id_from_dropdown_input, ~sneaker_id_from_dropdown_input, ~quantit
 insert into RaffleOrders (order_id, raffle_id)
 values (~order_id_from_dropdown_input, ~raffle_id_from_dropdown_input);
 
+-- update a customer based on Update Customer form submission
+update Customers
+set name = ~name_input, email = ~email_input, phone_number = ~phone_number_input
+where customer_id = ~customer_id_from_browse_customer_page;
+
+-- delete a customer
+delete from Customers
+where customer_id = ~customer_id_from_browse_customer_page;
+
 -- update a sneaker based on Update Sneaker form submission
 update Sneakers
-set brand = ~brand_input, model_name = ~model_name_input, size = ~size_input, colorway = ~colorway_input, price = ~price_input, stock_count = ~stock_count_input;
+set brand = ~brand_input, model_name = ~model_name_input, size = ~size_input, colorway = ~colorway_input, price = ~price_input, stock_count = ~stock_count_input
+where sneaker_id = ~sneaker_id_from_browse_sneaker_page;
+
+-- delete a sneaker
+delete from Sneakers
+where sneaker_id = ~sneaker_id_from_browse_sneaker_page;
 
 -- update an order entry
 update Orders
@@ -98,10 +111,6 @@ where raffle_order_id = ~raffle_order_id_passed_from_form;
 -- delete a raffle order entry
 delete from RaffleOrders
 where raffle_order_id = ~raffle_order_id_passed_from_form;
-
--- delete a sneaker
-delete from Sneakers
-where sneaker_id = ~sneaker_id_from_browse_sneaker_page;
 
 -- delete a sneaker order entry
 delete from SneakerOrders
