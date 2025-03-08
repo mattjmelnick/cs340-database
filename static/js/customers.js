@@ -25,3 +25,27 @@ function showCustomerDelete(customer) {
 	// show the form
 	customerDeleteForm.style.display = "block";
 }
+
+// get the phone inputs
+const phoneInputs = document.querySelectorAll(".phoneInput");
+// iterate over the inputs to add the event listener
+phoneInputs.forEach(phoneInput => {
+    phoneInput.addEventListener('input', (num) => {
+        // prevent non-numerical characters
+        let number = num.target.value.replace(/\D/g, '');
+        let enteredValue = '';
+        
+        // add hyphen after third and sixth numbers
+        if (number.length > 0) {
+            enteredValue += number.substring(0, 3);
+            if (number.length > 3) {
+                enteredValue += '-' + number.substring(3, 6);
+                if (number.length > 6) {
+                    enteredValue += '-' + number.substring(6, 10);
+                }
+            }
+        }
+
+        num.target.value = enteredValue;
+    });
+});
