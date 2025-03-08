@@ -23,69 +23,66 @@
     </nav>
     <h2>Sneaker Orders</h2>
     <h3><strong>Manage Sneaker Order Transactions</strong></h3>
-    <button class="addBtn" onclick="showAddForm()">Add New Sneaker Order Entry</button>
-    <form action="sneaker_orders.html" method="POST" class="addForm" style="display: none">
+    <button class="addBtn" onclick="showAddForm('#sneakerOrderAddForm')">Add New Sneaker Order Entry</button>
+    <form action="sneaker_orders" method="POST" class="addForm" id="sneakerOrderAddForm" style="display: none">
         <legend>
             <strong>Add Sneaker Order</strong>
         </legend>
         <fieldset>
             <label for="soOrderID">Order ID</label>
             <select name="soOrderID" id="soOrderID">
-                <option value="blank"></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                {% for order in orders %}
+                	<option value="{{ order.order_id }}">{{ order.order_id }}</option>
+				{% endfor %}
             </select required>
             <label for="soOrderID">Sneaker ID</label>
             <select name="soSneakerID" id="soSneakerID">
-                <option value="blank"></option>
-                <option value="null">NULL</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                {% for sneaker in sneakers %}
+                	<option value="{{ sneaker.sneaker_id }}">{{ sneaker.sneaker_id }}</option>
+				{% endfor %}
             </select required>
             <label for="soQuantity">Quantity</label>
-            <input type="number" name="soQuantity" required>
+            <input type="number" name="soQuantity" id="soQuantity" required>
             <br>
             <br>
             <button type="submit">Add Sneaker Order</button>
 			<button onclick="hideAddForm()">Cancel</button>
         </fieldset>
     </form>
-    <form action="sneaker_orders.html" class="updateForm" style="display: none">
+    <form method="POST" class="updateForm" id="sneakerOrderUpdateForm" style="display: none">
         <legend>
             <strong>Update Sneaker Order</strong>
         </legend>
         <fieldset>
             <label for="soIDUpdate">Sneaker Order ID</label>
-            <span>1</span>
+            <span id="soIDUpdate"></span>
             <label for="soOrderIDUpdate">Order ID</label>
             <select name="soOrderIDUpdate" id="soOrderIDUpdate">
-                <option value="1">1</option>
+                {% for order in orders %}
+                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }}</option>
+				{% endfor %}
             </select required>
             <label for="soSneakerIDUpdate">Sneaker ID</label>
             <select name="soSneakerIDUpdate" id="soSneakerIDUpdate">
-                <option value="null">NULL</option>
-                <option value="4" selected>4</option>
+                {% for sneaker in sneakers %}
+                	<option value="{{ sneaker['sneaker_id'] }}">{{ sneaker['sneaker_id'] }}</option>
+				{% endfor %}
             </select required>
             <label for="soQuantityUpdate">Quantity</label>
-            <input type="number" name="soQuantityUpdate" value="1" required>
+            <input type="number" name="soQuantityUpdate" id="soQuantityUpdate" value="1" required>
             <br>
             <br>
             <button type="submit">Update Sneaker Order</button>
-			<button onclick="hideUpdateForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#sneakerOrderAddForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="sneaker_orders.html" class="deleteForm" style="display: none">
+    <form method="POST" class="deleteForm" id="sneakerOrderDeleteForm" style="display: none">
         <legend>
             <strong>Delete Sneaker Order</strong>
         </legend>
         <fieldset>
             <label for="soIDDelete"><u>Sneaker Order ID</u></label>
-            <span>1</span>
+            <span id="soIDDelete"></span>
             <br>
             <br>
             <button type="submit">Delete Sneaker Order</button>
@@ -103,31 +100,34 @@
                 <th>Delete</th>
             </tr>
         </thead>
+        <thead>
+            <tr>
+                <th>Raffle Order ID</th>
+                <th>Order ID</th>
+                <th>Raffle ID</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
         <tbody>
+			{% for sneaker_order in sneaker_orders %}
             <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>4</td>
-                <td>1</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
+                <td>{{ sneaker_order.sneaker_order_id }}</td>
+                <td>{{ sneaker_order.order_id }}</td>
+                <td>{{ sneaker_order.sneaker_id }}</td>
+                <td>{{ sneaker_order.quantity }}</td>
+	   			<!-- The JavaScript function implementations are original -->
+                <td><button onclick="showSneakerOrderUpdate(
+                    '{{ sneaker_order['sneaker_order_id'] }}',
+                    '{{ sneaker_order['order_id'] }}',
+                    '{{ sneaker_order['sneaker_id'] }}',
+					{{ sneaker_order['quantity'] }})
+					">Edit</button></td>
+                <!-- pass the sneaker_order object to the delete form -->
+                <td><button onclick="showSODelete(
+					'{{ sneaker_order['sneaker_order_id'] }}')">Delete</button></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>4</td>
-                <td>1</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>3</td>
-                <td>5</td>
-                <td>2</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
+			{% endfor %}
         </tbody>
     </table>
 </body>

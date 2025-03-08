@@ -23,18 +23,17 @@
     </nav>
     <h2>Orders</h2>
     <h3><strong>View Order History</strong></h3>
-    <button class="addBtn" onclick="showAddForm()">Add New Order Entry</button>
-    <form action="orders.html" method="POST" class="addForm" style="display: none">
+    <button class="addBtn" onclick="showAddForm('#orderAddform')">Add New Order Entry</button>
+    <form action="orders" method="POST" id="orderAddForm" style="display: none">
         <legend>
             <strong>Add Order</strong>
         </legend>
         <fieldset>
             <label for="orderCustomerID">Customer</label>
             <select name="orderCustomerID" id="orderCustomerID">
-                <option value="blank"></option>
-                <option value="1">Jonah Hill</option>
-                <option value="2">Will Ferrell</option>
-                <option value="3">Dave Chappelle</option>
+                {% for customer in customers %}
+                <option value="{{customer.customer_id}}">{{customer.customer_id}}</option>
+                {% endfor %}
             </select>
             <label for="orderDate">Purchase Date</label>
             <input type="date" name="orderDate" required>
@@ -48,24 +47,27 @@
             <br>
             <br>
             <button type="submit">Add Order</button>
-			<button onclick="hideAddForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#orderAddForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="orders.html" class="updateForm" style="display: none">
+    <!-- Update an Order in the database -->
+    <form method="POST" id="orderUpdateForm" style="display: none">
         <legend>
             <strong>Update Order</strong>
         </legend>
         <fieldset>
             <label for="orderIDUpdate">Order ID</label>
-            <span>1</span>
+            <span id="orderIDUpdate">1</span>
             <label for="orderCustomerIDUpdate">Customer ID</label>
-            <select name="orderCustomerIDUPdate" id="orderCustomerIDUPdate">
-                <option value="1">1</option>
+            <select name="orderCustomerIDUpdate" id="orderCustomerIDUpdate">
+                {% for customer in customers %}
+                <option value="{{customer.customer_id}}">{{customer.customer_id}}</option>
+                {% endfor %}
             </select required>
             <label for="orderDateUpdate">Purchase Date</label>
-            <input type="date" name="orderDateUpdate" value="2025-06-13" required>
+            <input type="date" name="orderDateUpdate" id="orderDateUpdate" value="2025-06-13" required>
             <label for="orderPriceUpdate">Total Price</label>
-            <input type="number" name="orderPriceUpdate" step="0.01" value="620.00" required>
+            <input type="number" name="orderPriceUpdate" id="orderDateUpdate" step="0.01" value="620.00" required>
             <label for="orderEnteredRaffleUpdate">Entered Raffle</label>
             <select name="orderEnteredRaffleUpdate" id="orderEnteredRaffleUpdate">
                 <option value="1">Yes</option>
@@ -74,20 +76,20 @@
             <br>
             <br>
             <button type="submit">Update Order</button>
-			<button onclick="hideUpdateForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#orderUpdateForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="orders.html" class="deleteForm" style="display: none">
+    <form method="POST" class="deleteForm" id="orderDeleteForm" style="display: none">
         <legend>
             <strong>Delete Order</strong>
         </legend>
         <fieldset>
             <label for="orderIDDelete"><u>Order ID</u></label>
-            <span>1</span>
+            <span id="orderIDDelete"></span>
             <br>
             <br>
             <button type="submit">Delete Order</button>
-			<button onclick="hideDeleteForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#orderDeleteForm')">Cancel</button>
         </fieldset>
     </form>
     <table>
@@ -103,43 +105,27 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>06-13-2025</td>
-                <td>620.00</td>
-                <td>Yes</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>06-13-2025</td>
-                <td>350.00</td>
-                <td>No</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>2</td>
-                <td>05-17-2025</td>
-                <td>970.00</td>
-                <td>Yes</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>3</td>
-                <td>04-12-2025</td>
-                <td>270.00</td>
-                <td>Yes</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-        </tbody>
+            <!-- The for loop code is based on the CS 340 Flask Starter App -->
+		  		<!-- access the dictionary data passed from the order blueprint -->
+		  		<!-- iterate through the list of dictionaries -->
+				{% for order in orders %}
+            	<tr>
+		  			<!-- place each column value in table cells -->
+					<td>{{ order.order_id }}</td>
+					<td>{{ order.customer_id}}</td>
+					<td>{{ order.purchase_date}}</td>
+					<td>{{ order.total_price}}</td>
+                    <td>{{ order.entered_raffle}}</td>
+
+	   				<!-- The JavaScript function implementations are original -->
+		  			<!-- pass the order object to the edit form -->
+                	<td><button onclick="showOrderUpdate('{{ order['order_id'] }}', '{{ order['customer_id'] }}', '{{ order['purchase_date'] }}', '{{ order['total_price'] }}', '{{ order['entered_raffle'] }}')">Edit</button></td>
+
+		  			<!-- pass the order object to the delete form -->
+                	<td><button onclick="showOrderDelete( '{{ order['order_id'] }}' )">Delete</button></td>
+            	</tr>
+				{% endfor %}
+         </tbody>
     </table>
 </body>
 </html>

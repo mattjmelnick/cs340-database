@@ -19,7 +19,7 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
 
 # Configuration
 app = Flask(__name__)
-
+app.secret_key = "Beavers"
 # Routes 
 @app.route('/')
 def root():
@@ -37,5 +37,5 @@ app.register_blueprint(customer_raffles_bp)
 
 # Listener
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 9008)) 
+    port = int(os.environ.get('PORT', 12053)) 
     app.run(port=port, debug=True) 

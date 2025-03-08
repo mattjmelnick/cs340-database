@@ -23,57 +23,60 @@
     </nav>
     <h2>Raffles</h2>
     <h3><strong>View Raffle Information</strong></h3>
-    <button class="addBtn" onclick="showAddForm()">Add New Raffle Entry</button>
-    <form action="raffles.html" method="POST" class="addForm" style="display: none">
+     <!-- Add a new Drawing to the database -->
+    <button class="addBtn" onclick="showAddForm('#raffleAddForm')">Add New Raffle Entry</button>
+    <form action="raffles" method="POST" id="raffleAddForm" style="display: none">
         <legend>
             <strong>Add Raffle</strong>
         </legend>
         <fieldset>
             <label for="raffleSneakerID">Sneaker</label>
             <select name="raffleSneakerID" id="raffleSneakerID">
-                <option value="blank"></option>
-                <option value="1">Nike Air Yeezy 2</option>
-                <option value="2">Nike SB Dunk Low "Ben & Jerry Chunky Dunky"</option>
-                <option value="3">Off-White x Jordan Retro 4 Sail</option>
+            {% for sneaker in sneakers %}
+                <option value="{{sneaker.sneaker_id}}">{{sneaker.sneaker_id}}</option>
+                {% endfor %}    
             </select required>
             <label for="raffleDescription">Raffle Description</label>
             <textarea name="raffleDescription" id="raffleDescription" rows="5" cols="30"></textarea>
             <label for="raffleEntryCost">Entry Cost</label>
-            <input type="number" name="raffleEntryCost" required>
+            <input type="number" name="raffleEntryCost" id="raffleEntryCost" required>
             <br>
             <br>
             <button type="submit">Add Raffle</button>
-			<button onclick="hideAddForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#raffleAddForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="raffles.html" class="updateForm" style="display: none">
+    <!-- Update a Raffle in the database -->
+    <form method="POST" id="raffleUpdateForm" style="display: none">
         <legend>
             <strong>Update Raffle</strong>
         </legend>
         <fieldset>
             <label for="raffleIDUpdate">Raffle ID</label>
-            <span>1</span>
+            <span id="raffleIDUpdate">raffleIDUpdate</span>
             <label for="raffleSneakerIDUpdate">Sneaker ID</label>
             <select name="raffleSneakerIDUpdate" id="raffleSneakerIDUpdate">
-                <option value="1">1</option>
+                {% for sneaker in sneakers %}
+                <option value="{{sneaker.sneaker_id}}">{{sneaker.sneaker_id}}</option>
+                {% endfor %}
             </select required>
             <label for="raffleDescriptionUpdate">Raffle Description</label>
             <textarea name="raffleDescriptionUpdate" id="raffleDescriptionUpdate" rows="5" cols="30" required>The Nike Air Yeezy 2 "Red October" is the latest collaboration with musician and fashion designer Kanye West.</textarea>
             <label for="raffleEntryCostUpdate">Entry Cost</label>
-            <input type="number" name="raffleEntryCostUpdate" value="20.00" required>
+            <input type="number" name="raffleEntryCostUpdate" id="raffleEntryCostUpdate" value="20.00" required>
             <br>
             <br>
             <button type="submit">Update Raffle</button>
-			<button onclick="hideUpdateForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#raffleUpdateForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="raffles.html" class="deleteForm" style="display: none">
+    <form method="POST" id="raffleDeleteForm" class="deleteForm" style="display: none">
         <legend>
             <strong>Delete Raffle</strong>
         </legend>
         <fieldset>
             <label for="raffleIDDelete"><u>Raffle ID</u></label>
-            <span>1</span>
+            <span id="raffleIDDelete"></span>
             <br>
             <br>
             <button type="submit">Delete Raffle</button>
@@ -91,32 +94,37 @@
                 <th>Delete</th>
             </tr>
         </thead>
-        <tbody>
+        <thead>
             <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>The Nike Air Yeezy 2 "Red October" is the latest collaboration with musician and fashion designer Kanye West.</td>
-                <td>20.00</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
+                <th>Drawing ID</th>
+                <th>Raffle ID</th>
+                <th>Draw Date</th>
+                <th>Draw Day</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>Drawing inspiration from Ben & Jerry's colorful ice cream pint packaging, this release goes beyond a simple new colorway and features unique detailing that has never been used on the Dunk Low silhouette.</td>
-                <td>20.00</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>3</td>
-                <td>After teasing the release of the Off-White 4 with samples in his MCA exhibit and presenting them in his Off-White FW2020 Women's Show, Jordan finally delivered what might be the most anticipated re-release of 2025</td>
-                <td>20.00</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-        </tbody>
+        </thead>
+         <tbody>
+		 		<!-- The for loop code is based on the CS 340 Flask Starter App -->
+		  		<!-- access the dictionary data passed from the raffle blueprint -->
+		  		<!-- iterate through the list of dictionaries -->
+				{% for raffle in raffles %}
+            	<tr>
+		  			<!-- place each column value in table cells -->
+					<td>{{ raffle.raffle_id }}</td>
+					<td>{{ raffle.sneaker_id}}</td>
+					<td>{{ raffle.raffle_description}}</td>
+					<td>{{ raffle.entry_cost }}</td>
+
+	   				<!-- The JavaScript function implementations are original -->
+		  			<!-- pass the raffle object to the edit form -->
+                	<td><button onclick="showRaffleUpdate('{{ raffle['raffle_id']}}', '{{raffle['sneaker_id']}}','{{raffle['raffle_description']}}', '{{raffle['entry_cost'] }}')">Edit</button></td>
+
+		  			<!-- pass the raffle object to the delete form -->
+                	<td><button onclick="showRaffleDelete('{{ raffle['raffle_id'] }}')">Delete</button></td>
+            	</tr>
+				{% endfor %}
+         </tbody>
     </table>
 </body>
 </html>
