@@ -6,7 +6,7 @@
     <title>Eastern Beaver Sneaker Boutique</title>
     <link rel="stylesheet" href="./static/css/style.css">
     <script src="./static/js/main.js"></script>
-    <script src="./static/js/drawings.js"></script>
+     <script src="./static/js/drawings.js"></script>
 </head>
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
@@ -22,9 +22,10 @@
         <a href="customer_raffles">Customer Raffles</a>
     </nav>
     <h2>Drawings</h2>
-    <h3><strong>Browse Raffle Drawings</strong></h3>
-    <button class="addBtn" onclick="showAddForm()">Add New Drawing Entry</button>
-    <form action="drawings.html" method="POST" class="addForm" style="display: none">
+    <p><strong>Browse Raffle Drawings</strong></p>
+    <!-- Add a new Drawing to the database -->
+    <button class="addBtn" onclick="showAddForm('#drawingAddForm')">Add New Drawing Entry</button>
+    <form action="drawings" method="POST" id="drawingAddForm" style="display: none">
         <legend>
             <strong>Add Drawing</strong>
         </legend>
@@ -40,56 +41,60 @@
             <input type="date" name="drawingDate" required>
             <label for="drawingDay">Draw Day</label>
             <select name="drawingDay" id="drawingDay">
-                <option value="sun">Sunday</option>
-                <option value="mon">Monday</option>
-                <option value="tue">Tuesday</option>
-                <option value="wed">Wednesday</option>
-                <option value="thu">Thursday</option>
-                <option value="fri">Friday</option>
-                <option value="sat">Saturday</option>
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesda">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
             </select required>
             <br>
             <br>
             <button type="submit">Add Drawing</button>
-			<button onclick="hideAddForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#drawingAddForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="drawings.html" class="updateForm" style="display: none">
+
+    <!-- Update a Drawing in the database -->
+    <form method="POST" id="drawingUpdateForm" style="display: none">
         <legend>
             <strong>Update Drawing</strong>
         </legend>
         <fieldset>
             <label for="drawingIDUpdate">Drawing ID</label>
-            <span>1</span>
+            <span id="drawingIDUpdate">drawingIDUpdate</span>
             <label for="drawingRaffleIDUpdate">Raffle ID</label>
             <select name="drawingRaffleIDUpdate" id="drawingRaffleIDUpdate">
-                <option value="1">1</option>
+                {% for raffle in raffles %}
+                <option value="{{raffle.raffle_id}}">{{raffle.raffle_id}}</option>
+                {% endfor %}
             </select required>
             <label for="drawingDateUpdate">Draw Date</label>
             <input type="date" name="drawingDateUpdate" value="2025-04-12" required>
             <label for="drawingDayUpdate">Draw Day</label>
             <select name="drawingDayUpdate" id="drawingDayUpdate">
-                <option value="sun">Sunday</option>
-                <option value="mon">Monday</option>
-                <option value="tue">Tuesday</option>
-                <option value="wed">Wednesday</option>
-                <option value="thu">Thursday</option>
-                <option value="fri">Friday</option>
-                <option value="sat" selected>Saturday</option>
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
             </select required>
             <br>
             <br>
             <button type="submit">Update Drawing</button>
-			<button onclick="hideUpdateForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#drawingUpdateForm')">Cancel</button>
         </fieldset>
     </form>
-    <form action="drawings.html" class="deleteForm" style="display: none">
+    <form method="POST" id="drawingDeleteForm" class="deleteForm" style="display: none">
         <legend>
             <strong>Delete Drawing</strong>
         </legend>
         <fieldset>
             <label for="drawingIDDelete"><u>Drawing ID</u></label>
-            <span>1</span>
+            <span id="drawingIDDelete"></span>
             <br>
             <br>
             <button type="submit">Delete Drawing</button>
@@ -107,32 +112,27 @@
                 <th>Delete</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>04-12-2025</td>
-                <td>Saturday</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>05-17-2025</td>
-                <td>Saturday</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>3</td>
-                <td>06-13-2025</td>
-                <td>Friday</td>
-                <td><button onclick="showUpdateForm()">Edit</button></td>
-                <td><button onclick="showDeleteForm()">Delete</button></td>
-            </tr>
-        </tbody>
+         <tbody>
+		 		<!-- The for loop code is based on the CS 340 Flask Starter App -->
+		  		<!-- access the dictionary data passed from the drawing blueprint -->
+		  		<!-- iterate through the list of dictionaries -->
+				{% for drawing in drawings %}
+            	<tr>
+		  			<!-- place each column value in table cells -->
+					<td>{{ drawing.drawing_id }}</td>
+					<td>{{ drawing.raffle_id}}</td>
+					<td>{{ drawing.draw_date}}</td>
+					<td>{{ drawing.draw_day }}</td>
+
+	   				<!-- The JavaScript function implementations are original -->
+		  			<!-- pass the drawing object to the edit form -->
+                	<td><button onclick="showDrawingUpdate('{{ drawing['drawing_id']}}', '{{drawing['raffle_id']}}','{{drawing['draw_date']}}', '{{drawing['draw_day'] }}')">Edit</button></td>
+
+		  			<!-- pass the customer object to the delete form -->
+                	<td><button onclick="showDrawingDelete('{{ drawing['drawing_id'] }}')">Delete</button></td>
+            	</tr>
+				{% endfor %}
+         </tbody>
     </table>
 </body>
 </html>
