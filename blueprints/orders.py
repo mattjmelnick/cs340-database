@@ -51,7 +51,7 @@ def edit_order(order_id):
         db.execute_query(db_connection=db_connection, query=query,
                         query_params=(customer_id, purchase_date, total_price, entered_raffle, order_id))
 
-        # return to customers page
+        # return to orders page
         return redirect(url_for('orders.orders'))
     finally:
         db_connection.close()

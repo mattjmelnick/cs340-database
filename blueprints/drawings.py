@@ -63,7 +63,7 @@ def delete_drawing(drawing_id):
         query = f"DELETE FROM Drawings WHERE drawing_id = {drawing_id}"
         db.execute_query(db_connection=db_connection, query=query)
 
-        # return to customers page
+        # return to drawings page
         return redirect(url_for('drawings.drawings'))
     finally:
         db_connection.close()
