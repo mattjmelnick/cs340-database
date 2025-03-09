@@ -16,7 +16,8 @@ def sneakers():
             price = request.form.get("sneakerPrice")
             stock_count = request.form.get("sneakerStock")
             # add the new sneaker to the database
-            query = """INSERT INTO Sneakers (brand, model_name, size, colorway, price, stock_count) VALUES (%s, %s, %s, %s, %s, %s)"""
+            query = """INSERT INTO Sneakers (brand, model_name, size, colorway, price, stock_count) 
+                        VALUES (%s, %s, %s, %s, %s, %s)"""
             db.execute_query(db_connection=db_connection,
                                         query=query,
                                         query_params=(brand, model_name, size, colorway, price, stock_count))

@@ -95,19 +95,23 @@
             </tr>
         </thead>
         <tbody>
+            <!-- The for loop code is based on the CS 340 Flask Starter App -->
+            <!-- access the dictionary data passed from the raffle_order blueprint -->
+            <!-- iterate through the list of dictionaries -->
 			{% for raffle_order in raffle_orders %}
             <tr>
                 <td>{{ raffle_order.raffle_order_id }}</td>
                 <td>{{ raffle_order.order_id }}</td>
                 <td>{{ raffle_order.raffle_id }}</td>
 	   			<!-- The JavaScript function implementations are original -->
+		  		<!-- pass the raffle_order attributes to the edit form -->
                 <td><button onclick="showROUpdate(
                     '{{ raffle_order['raffle_order_id'] }}',
                     '{{ raffle_order['order_id'] }}',
                     '{{ raffle_order['raffle_id'] }}',
 					{{ order_ids }},
 					{{ raffle_ids }})">Edit</button></td>
-                <!-- pass the raffle_order object to the delete form -->
+                <!-- pass the raffle_order_id to the delete form -->
                 <td><button onclick="showRODelete(
 					'{{ raffle_order['raffle_order_id'] }}')">Delete</button></td>
             </tr>

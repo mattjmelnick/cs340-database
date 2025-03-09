@@ -3,7 +3,6 @@ import database.db_connector as db
 
 raffles_bp = Blueprint('raffles', __name__)
 
-
 @raffles_bp.route('/raffles', methods=["GET", "POST"])
 def raffles():
     db_connection = db.connect_to_database()
@@ -15,7 +14,8 @@ def raffles():
             entry_cost= request.form.get("raffleEntryCost")
             # add the new raffle to the database
             query = "INSERT INTO Raffles (sneaker_id, raffle_description, entry_cost) VALUES (%s, %s, %s)"
-            db.execute_query(db_connection=db_connection, query=query, query_params=(sneaker_id, raffle_description, entry_cost))
+            db.execute_query(db_connection=db_connection, query=query,
+                             query_params=(sneaker_id, raffle_description, entry_cost))
 
             # return to raffle page
             return redirect(url_for('raffles.raffles'))
@@ -25,11 +25,13 @@ def raffles():
             query = "SELECT * FROM Raffles"
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
-            fetch_sneaker_query = "SELECT * FROM Sneakers"
-            fetch_sneaker_cursor = db.execute_query(db_connection=db_connection, query=fetch_sneaker_query)
-            sneaker_result = fetch_sneaker_cursor.fetchall()
 
-            return render_template("raffles.j2", raffles=results, sneakers=sneaker_result)
+            # get the sneaker_id from the Sneakers table
+            sneaker_query = "SELECT sneaker_id FROM Sneakers"
+            cursor = db.execute_query(db_connection=db_connection, query=sneaker_query)
+            sneaker_data = cursor.fetchall()
+
+            return render_template("raffles.j2", raffles=results, sneakers=sneaker_data)
     finally:
         db_connection.close()
 
@@ -44,8 +46,9 @@ def edit_raffle(raffle_id):
         entry_cost = request.form.get("raffleEntryCostUpdate")
         # update the raffe in the database using the input data
         query = """UPDATE Raffles SET sneaker_id = %s, raffle_description = %s,
-            entry_cost = %s WHERE raffle_id = %s"""
-        db.execute_query(db_connection=db_connection, query=query, query_params=(sneaker_id, raffle_description, entry_cost, raffle_id))
+                    entry_cost = %s WHERE raffle_id = %s"""
+        db.execute_query(db_connection=db_connection, query=query,
+                         query_params=(sneaker_id, raffle_description, entry_cost, raffle_id))
 
         # return to raffles page
         return redirect(url_for('raffles.raffles'))

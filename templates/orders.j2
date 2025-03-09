@@ -23,6 +23,7 @@
     </nav>
     <h2>Orders</h2>
     <h3><strong>View Order History</strong></h3>
+    <!-- Add a new Order to the database -->
     <button class="addBtn" onclick="showAddForm('#orderAddform')">Add New Order Entry</button>
     <form action="orders" method="POST" id="orderAddForm" style="display: none">
         <legend>
@@ -32,7 +33,7 @@
             <label for="orderCustomerID">Customer</label>
             <select name="orderCustomerID" id="orderCustomerID">
                 {% for customer in customers %}
-                <option value="{{customer.customer_id}}">{{customer.customer_id}}</option>
+                    <option value="{{customer.customer_id}}">{{customer.customer_id}}</option>
                 {% endfor %}
             </select>
             <label for="orderDate">Purchase Date</label>
@@ -57,7 +58,7 @@
         </legend>
         <fieldset>
             <label for="orderIDUpdate">Order ID</label>
-            <span id="orderIDUpdate">1</span>
+            <span id="orderIDUpdate"></span>
             <label for="orderCustomerIDUpdate">Customer ID</label>
             <select name="orderCustomerIDUpdate" id="orderCustomerIDUpdate">
                 {% for customer in customers %}
@@ -65,9 +66,9 @@
                 {% endfor %}
             </select required>
             <label for="orderDateUpdate">Purchase Date</label>
-            <input type="date" name="orderDateUpdate" id="orderDateUpdate" value="2025-06-13" required>
+            <input type="date" name="orderDateUpdate" id="orderDateUpdate" value="" required>
             <label for="orderPriceUpdate">Total Price</label>
-            <input type="number" name="orderPriceUpdate" id="orderDateUpdate" step="0.01" value="620.00" required>
+            <input type="number" name="orderPriceUpdate" id="orderDateUpdate" step="0.01" value="" required>
             <label for="orderEnteredRaffleUpdate">Entered Raffle</label>
             <select name="orderEnteredRaffleUpdate" id="orderEnteredRaffleUpdate">
                 <option value="1">Yes</option>
@@ -105,7 +106,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- The for loop code is based on the CS 340 Flask Starter App -->
+                <!-- The for loop code is based on the CS 340 Flask Starter App -->
 		  		<!-- access the dictionary data passed from the order blueprint -->
 		  		<!-- iterate through the list of dictionaries -->
 				{% for order in orders %}
@@ -116,13 +117,17 @@
 					<td>{{ order.purchase_date}}</td>
 					<td>{{ order.total_price}}</td>
                     <td>{{ order.entered_raffle}}</td>
-
 	   				<!-- The JavaScript function implementations are original -->
-		  			<!-- pass the order object to the edit form -->
-                	<td><button onclick="showOrderUpdate('{{ order['order_id'] }}', '{{ order['customer_id'] }}', '{{ order['purchase_date'] }}', '{{ order['total_price'] }}', '{{ order['entered_raffle'] }}')">Edit</button></td>
-
-		  			<!-- pass the order object to the delete form -->
-                	<td><button onclick="showOrderDelete( '{{ order['order_id'] }}' )">Delete</button></td>
+		  			<!-- pass the order attributes to the edit form -->
+                	<td><button onclick="showOrderUpdate(
+                        '{{ order['order_id'] }}',
+                        '{{ order['customer_id'] }}',
+                        '{{ order['purchase_date'] }}',
+                        '{{ order['total_price'] }}',
+                        '{{ order['entered_raffle'] }}')">Edit</button></td>
+		  			<!-- pass the order_id to the delete form -->
+                	<td><button onclick="showOrderDelete(
+                        '{{ order['order_id'] }}' )">Delete</button></td>
             	</tr>
 				{% endfor %}
          </tbody>

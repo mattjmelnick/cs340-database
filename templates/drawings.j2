@@ -6,7 +6,7 @@
     <title>Eastern Beaver Sneaker Boutique</title>
     <link rel="stylesheet" href="./static/css/style.css">
     <script src="./static/js/main.js"></script>
-     <script src="./static/js/drawings.js"></script>
+    <script src="./static/js/drawings.js"></script>
 </head>
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
@@ -32,10 +32,9 @@
         <fieldset>
             <label for="drawingRaffleID">Raffle ID</label>
             <select name="drawingRaffleID" id="drawingRaffleID">
-                <option value="blank"></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                {% for raffle in raffles %}
+                    <option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_id'] }}</option>
+                {% endfor %}
             </select>
             <label for="drawingDate">Draw Date</label>
             <input type="date" name="drawingDate" required>
@@ -44,7 +43,7 @@
                 <option value="Sunday">Sunday</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
-                <option value="Wednesda">Wednesday</option>
+                <option value="Wednesday">Wednesday</option>
                 <option value="Thursday">Thursday</option>
                 <option value="Friday">Friday</option>
                 <option value="Saturday">Saturday</option>
@@ -55,7 +54,6 @@
 			<button type="button" onclick="cancelForm('#drawingAddForm')">Cancel</button>
         </fieldset>
     </form>
-
     <!-- Update a Drawing in the database -->
     <form method="POST" id="drawingUpdateForm" style="display: none">
         <legend>
@@ -63,15 +61,15 @@
         </legend>
         <fieldset>
             <label for="drawingIDUpdate">Drawing ID</label>
-            <span id="drawingIDUpdate">drawingIDUpdate</span>
+            <span id="drawingIDUpdate"></span>
             <label for="drawingRaffleIDUpdate">Raffle ID</label>
             <select name="drawingRaffleIDUpdate" id="drawingRaffleIDUpdate">
                 {% for raffle in raffles %}
-                <option value="{{raffle.raffle_id}}">{{raffle.raffle_id}}</option>
+                    <option value="{{raffle.raffle_id}}">{{raffle.raffle_id}}</option>
                 {% endfor %}
             </select required>
             <label for="drawingDateUpdate">Draw Date</label>
-            <input type="date" name="drawingDateUpdate" value="2025-04-12" required>
+            <input type="date" name="drawingDateUpdate" value="" required>
             <label for="drawingDayUpdate">Draw Day</label>
             <select name="drawingDayUpdate" id="drawingDayUpdate">
                 <option value="Sunday">Sunday</option>
@@ -88,7 +86,8 @@
 			<button type="button" onclick="cancelForm('#drawingUpdateForm')">Cancel</button>
         </fieldset>
     </form>
-    <form method="POST" id="drawingDeleteForm" class="deleteForm" style="display: none">
+    <!-- Delete a Drawing from the database -->
+    <form method="POST" id="drawingDeleteForm" style="display: none">
         <legend>
             <strong>Delete Drawing</strong>
         </legend>
@@ -98,7 +97,7 @@
             <br>
             <br>
             <button type="submit">Delete Drawing</button>
-			<button onclick="hideDeleteForm()">Cancel</button>
+			<button type="button" onclick="cancelForm('#drawingDeleteForm')">Cancel</button>
         </fieldset>
     </form>
     <table>
@@ -123,13 +122,16 @@
 					<td>{{ drawing.raffle_id}}</td>
 					<td>{{ drawing.draw_date}}</td>
 					<td>{{ drawing.draw_day }}</td>
-
 	   				<!-- The JavaScript function implementations are original -->
-		  			<!-- pass the drawing object to the edit form -->
-                	<td><button onclick="showDrawingUpdate('{{ drawing['drawing_id']}}', '{{drawing['raffle_id']}}','{{drawing['draw_date']}}', '{{drawing['draw_day'] }}')">Edit</button></td>
-
-		  			<!-- pass the customer object to the delete form -->
-                	<td><button onclick="showDrawingDelete('{{ drawing['drawing_id'] }}')">Delete</button></td>
+		  			<!-- pass the drawing attributes to the edit form -->
+                	<td><button onclick="showDrawingUpdate(
+                        '{{ drawing['drawing_id'] }}',
+                        '{{ drawing['raffle_id'] }}',
+                        '{{ drawing['draw_date'] }}',
+                        '{{ drawing['draw_day'] }}')">Edit</button></td>
+		  			<!-- pass the drawing_id to the delete form -->
+                	<td><button onclick="showDrawingDelete(
+                        '{{ drawing['drawing_id'] }}')">Delete</button></td>
             	</tr>
 				{% endfor %}
          </tbody>

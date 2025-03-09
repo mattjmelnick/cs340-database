@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for
 import database.db_connector as db
 
 customer_raffles_bp = Blueprint('customer_raffles', __name__)
@@ -14,7 +14,8 @@ def customers_raffles():
             won_raffle = request.form.get("customerWonRaffle")
             # add the new customer raffle to the database
             query = "INSERT INTO CustomerRaffles (raffle_id, customer_id, won_raffle) VALUES (%s, %s, %s)"
-            db.execute_query(db_connection=db_connection, query=query, query_params=(raffle_id, customer_id, won_raffle))
+            db.execute_query(db_connection=db_connection, query=query,
+                             query_params=(raffle_id, customer_id, won_raffle))
 
             # return to customer raffles page
             return redirect(url_for('customer_raffles.customers_raffles'))
@@ -25,15 +26,18 @@ def customers_raffles():
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
 
+            # get the customer attributes
             customer_query = "SELECT * FROM Customers"
             customer_cursor = db.execute_query(db_connection=db_connection, query=customer_query)
             customer_results = customer_cursor.fetchall()
 
+            # get the raffle attributes
             raffle_query = "SELECT * FROM Raffles"
             raffle_cursor = db.execute_query(db_connection=db_connection, query=raffle_query)
             raffle_results = raffle_cursor.fetchall()
 
-            return render_template("customer_raffles.j2", customers_raffles=results, customers=customer_results, raffles=raffle_results)
+            return render_template("customer_raffles.j2", customers_raffles=results,
+                                   customers=customer_results, raffles=raffle_results)
     finally:
         db_connection.close()
 
@@ -106,4 +110,3 @@ def delete_customer(customer_raffle_id):
         return redirect(url_for('customer_raffles.customers_raffles'))
     finally:
         db_connection.close()
-

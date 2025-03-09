@@ -1,4 +1,4 @@
-function showOrderUpdate(order_id, customer_id,purchase_date, total_price,entered_raffle) {
+function showOrderUpdate(order_id, customer_id, purchase_date, total_price, entered_raffle) {
 	// set the update form's action to pass the row's order_id
 	let orderUpdateForm = document.getElementById("orderUpdateForm");
 	orderUpdateForm.action = `/edit_order/${order_id}`;
@@ -19,7 +19,7 @@ function showOrderDelete(order_id) {
 	let orderDeleteForm = document.getElementById("orderDeleteForm");
 	orderDeleteForm.action = `/delete_order/${order_id}`;
 
-	// set the form text to the order_id and customer_id
+	// set the form text to the order_id
 	document.getElementById("orderIDDelete").textContent = order_id;
 
 	// show the form

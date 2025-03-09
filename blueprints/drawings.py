@@ -15,7 +15,8 @@ def drawings():
             draw_day= request.form.get("drawingDay")
             # add the new drawing to the database
             query = "INSERT INTO Drawings (raffle_id, draw_date, draw_day) VALUES (%s, %s, %s)"
-            db.execute_query(db_connection=db_connection, query=query, query_params=(raffle_id, draw_date, draw_day))
+            db.execute_query(db_connection=db_connection, query=query,
+                             query_params=(raffle_id, draw_date, draw_day))
 
             # return to drawing page
             return redirect(url_for('drawings.drawings'))
@@ -25,11 +26,13 @@ def drawings():
             query = "SELECT * FROM Drawings"
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
-            fetch_raffle_query = "SELECT * FROM Raffles"
-            fetch_raffle_cursor = db.execute_query(db_connection=db_connection, query=fetch_raffle_query)
-            raffle_result = fetch_raffle_cursor.fetchall()
 
-            return render_template("drawings.j2", drawings=results, raffles=raffle_result)
+            # get the raffle_ids from the Raffles table
+            fetch_raffle_query = "SELECT raffle_id FROM Raffles"
+            fetch_raffle_cursor = db.execute_query(db_connection=db_connection, query=fetch_raffle_query)
+            raffle_data = list(fetch_raffle_cursor.fetchall())
+
+            return render_template("drawings.j2", drawings=results, raffles=raffle_data)
     finally:
         db_connection.close()
 
@@ -43,8 +46,9 @@ def edit_drawing(drawing_id):
         draw_day = request.form.get("drawingDayUpdate")
         # update the drawing in the database using the input data
         query = """UPDATE Drawings SET raffle_id = %s, draw_date = %s,
-            draw_day = %s WHERE drawing_id = %s"""
-        db.execute_query(db_connection=db_connection, query=query, query_params=(raffle_id, draw_date, draw_day, drawing_id))
+                    draw_day = %s WHERE drawing_id = %s"""
+        db.execute_query(db_connection=db_connection, query=query,
+                         query_params=(raffle_id, draw_date, draw_day, drawing_id))
 
         # return to drawings page
         return redirect(url_for('drawings.drawings'))
@@ -63,4 +67,3 @@ def delete_drawing(drawing_id):
         return redirect(url_for('drawings.drawings'))
     finally:
         db_connection.close()
-

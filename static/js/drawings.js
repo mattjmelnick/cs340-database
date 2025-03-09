@@ -1,5 +1,4 @@
 function showDrawingUpdate(drawing_id, raffle_id, draw_date, draw_day) {
-	console.log(drawing_id, raffle_id, draw_date, draw_day)
 	// set the update form's action to pass the row's drawing_id
 	let drawingUpdateForm = document.getElementById("drawingUpdateForm");
 	drawingUpdateForm.action = `/edit_drawing/${drawing_id}`;
@@ -16,7 +15,6 @@ function showDrawingUpdate(drawing_id, raffle_id, draw_date, draw_day) {
 
 function showDrawingDelete(drawing_id) {
 	// set the delete form's action to pass the row's drawing_id
-	console.log(drawing_id)
 	let drawingDeleteForm = document.getElementById("drawingDeleteForm");
 	drawingDeleteForm.action = `/delete_drawing/${drawing_id}`;
 

@@ -1,5 +1,4 @@
 function showCustomerRaffleUpdate(customer_raffle_id, raffle_id, customer_id, won_raffle) {
-	console.log(customer_raffle_id, raffle_id, customer_id, won_raffle)
 	// set the update form's action to pass the row's customer_raffle_id
 	let customerRaffleUpdateForm = document.getElementById("customerRaffleUpdateForm");
 	customerRaffleUpdateForm.action = `/edit_customer_raffles/${customer_raffle_id}`;
@@ -16,15 +15,12 @@ function showCustomerRaffleUpdate(customer_raffle_id, raffle_id, customer_id, wo
 
 function showCustomerRaffleDelete(customer_raffle_id) {
 	// set the delete form's action to pass the row's customer_raffle_id
-		// set the delete form's action to pass the row's customer_id
 	let customerRaffleDeleteForm = document.getElementById("customerRaffleDeleteForm");
 	customerRaffleDeleteForm.action = `/delete_customer_raffles/${customer_raffle_id}`;
 	
 	// set the form text to the customer_raffle_id
 	document.getElementById("customerRaffleIDDelete").textContent = customer_raffle_id;
 		
-	
 	// show the form
 	customerRaffleDeleteForm.style.display = "block";
-
 }
