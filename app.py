@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, g
+import database.db_connector as db
 from blueprints.customers import customers_bp
 from blueprints.sneakers import sneakers_bp
 from blueprints.orders import orders_bp 
@@ -19,6 +20,29 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
 
 # Configuration
 app = Flask(__name__)
+
+"""
+Citation for these functions:
+Date: 3/9/25
+Modified from:
+https://flask.palletsprojects.com/en/stable/appcontext/
+and
+https://www.restack.io/p/flask-answer-persistent-database-connection
+"""
+def get_db_connection():
+    if "db_connection" not in g:
+        g.db_connection = db.connect_to_database()
+    return g.db_connection
+
+@app.before_request
+def before_request():
+    get_db_connection()
+
+@app.teardown_request
+def teardown_request(exception=None):
+    db_connection = g.pop("db_connection", None)
+    if db_connection is not None:
+        db_connection.close()
 
 # Routes 
 @app.route('/')
