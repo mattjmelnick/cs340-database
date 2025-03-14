@@ -26,6 +26,16 @@ function showCustomerDelete(customer) {
 	customerDeleteForm.style.display = "block";
 }
 
+/*
+phone number function citation:
+original source date: 3/8/25
+adapted from:
+https://stackoverflow.com/questions/9309278/javascript-regex-replace-all-characters-other-than-numbers
+https://community.qualtrics.com/custom-code-12/format-a-phone-field-to-have-added-dashes-303-234-2344-19778
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
+https://developer.mozilla.org/en-US/docs/Web/API/Event/target
+*/ 
+
 // get the phone inputs
 const phoneInputs = document.querySelectorAll(".phoneInput");
 // iterate over the inputs to add the event listener
