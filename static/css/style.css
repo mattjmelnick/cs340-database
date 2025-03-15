@@ -91,3 +91,16 @@ form {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+input {
+    height: 2rem;
+}
+
+select {
+    height: 2rem;
+    width: 70%;
+}
+
+button {
+    height: 32px;
+}
