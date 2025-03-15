@@ -4,7 +4,7 @@
 -- Variables that are used to pass data from the backend are denoted with '~' in front of them
 
 -- SELECT Queries to Populate Tables on Initial GET Requests
--- get the customer IDs, names, email addresses, and phone numbers from the Customers table
+-- get customer attributes from the Customers table
 select *
 from Customers;
 
@@ -13,28 +13,53 @@ select *
 from Sneakers;
 
 -- get drawings attributes from the Drawings table
-select *
-from Drawings;
+-- get raffle description from Raffles table
+SELECT *, raffle_description FROM Drawings
+INNER JOIN Raffles
+ON Drawings.raffle_id = Raffles.raffle_id;
 
 -- get raffle attributes from the Raffles table
-select *
-from Raffles;
+-- get brand and model name from Sneakers table
+SELECT *, brand, model_name FROM Raffles
+INNER JOIN Sneakers
+ON Raffles.sneaker_id = Sneakers.sneaker_id;
 
 -- get order attributes from the Orders table
-select *
-from Orders;
+-- get customer name from Customers table
+SELECT *, name FROM Orders
+INNER JOIN Customers
+ON Orders.customer_id = Customers.customer_id;
 
 -- get raffle order attributes from the RaffleOrders table
-select *
-from RaffleOrders;
+-- get customer name from Customers table
+-- get raffle description from Raffles table
+SELECT *, name, raffle_description FROM RaffleOrders
+INNER JOIN Raffles
+ON RaffleOrders.raffle_id = Raffles.raffle_id
+INNER JOIN Orders
+ON RaffleOrders.order_id = Orders.order_id
+INNER JOIN Customers
+ON Orders.customer_id = Customers.customer_id;
 
 -- get sneaker order attributes from the SneakerOrders table
-select *
-from SneakerOrders;
+-- get brand and model name from Sneakers table
+-- get customer name from Customers table
+SELECT *, brand, model_name, name FROM SneakerOrders
+INNER JOIN Sneakers
+ON SneakerOrders.sneaker_id = Sneakers.sneaker_id
+INNER JOIN Orders
+ON SneakerOrders.order_id = Orders.order_id
+INNER JOIN Customers
+ON Orders.customer_id = Customers.customer_id;
 
 -- get customer raffle attributes from the CustomerRaffles table
-select *
-from CustomerRaffles;
+-- get customer name from Customers table
+-- get raffle description from Raffles table
+SELECT *, name, raffle_description FROM CustomerRaffles
+INNER JOIN Customers
+ON CustomerRaffles.customer_id = Customers.customer_id
+INNER JOIN Raffles
+ON CustomerRaffles.raffle_id = Raffles.raffle_id;
 
 -- INSERT Queries to Create a New Table Entry Based on User Input
 -- add a new customer entry
