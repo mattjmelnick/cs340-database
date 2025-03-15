@@ -33,7 +33,7 @@
             <label for="raffleSneakerID">Sneaker</label>
             <select name="raffleSneakerID" id="raffleSneakerID">
                 {% for sneaker in sneakers %}
-                    <option value="{{ sneaker.sneaker_id }}">{{ sneaker.name }} {{ sneaker.model_name }}</option>
+                    <option value="{{ sneaker.sneaker_id }}">{{ sneaker.brand }} {{ sneaker.model_name }}</option>
                 {% endfor %}    
             </select required>
             <label for="raffleDescription">Raffle Description</label>
