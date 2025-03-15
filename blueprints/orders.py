@@ -28,7 +28,7 @@ def orders():
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
 
-        # get the customer_ids from the Customers table
+        # get the customer_ids and names from the Customers table
         customer_query = "SELECT customer_id, name FROM Customers" 
         customer_cursor = db.execute_query(db_connection=db_connection, query=customer_query)
         customer_results = customer_cursor.fetchall()

@@ -28,7 +28,7 @@ def drawings():
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
 
-        # get the raffle_ids from the Raffles table
+        # get the raffle_ids and raffle descriptions from the Raffles table
         fetch_raffle_query = "SELECT raffle_id, raffle_description FROM Raffles"
         fetch_raffle_cursor = db.execute_query(db_connection=db_connection, query=fetch_raffle_query)
         raffle_data = list(fetch_raffle_cursor.fetchall())

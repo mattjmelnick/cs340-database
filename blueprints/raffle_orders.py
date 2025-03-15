@@ -21,7 +21,7 @@ def raffle_orders():
 
     if request.method == "GET":
         query = """SELECT *, name, raffle_description FROM RaffleOrders
-                   INNER JOIN Raffles
+                   LEFT JOIN Raffles
                    ON RaffleOrders.raffle_id = Raffles.raffle_id
                    INNER JOIN Orders
                    ON RaffleOrders.order_id = Orders.order_id
@@ -30,14 +30,14 @@ def raffle_orders():
         cursor = db.execute_query(db_connection=db_connection, query=query)
         raffle_order_data = list(cursor.fetchall())
 
-        # get the list of order ids from the Orders table
+        # get the list of order ids and customer names from the Orders and Customers tables
         order_query = """SELECT order_id, name FROM Orders
                          INNER JOIN Customers
                          ON Orders.customer_id = Customers.customer_id"""
         cursor = db.execute_query(db_connection=db_connection, query=order_query)
         order_data = list(cursor.fetchall())
 
-        # get the list of raffle ids from the Raffles table
+        # get the list of raffle ids and raffle descriptions from the Raffles table
         raffle_query = "SELECT raffle_id, raffle_description FROM Raffles"
         cursor = db.execute_query(db_connection=db_connection, query=raffle_query)
         raffle_data = list(cursor.fetchall())

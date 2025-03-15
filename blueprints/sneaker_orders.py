@@ -24,7 +24,7 @@ def sneaker_orders():
     if request.method == "GET":
         # display the data from the database in the table
         query = """SELECT *, brand, model_name, name FROM SneakerOrders
-                   INNER JOIN Sneakers
+                   LEFT JOIN Sneakers
                    ON SneakerOrders.sneaker_id = Sneakers.sneaker_id
                    INNER JOIN Orders
                    ON SneakerOrders.order_id = Orders.order_id
@@ -33,12 +33,12 @@ def sneaker_orders():
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
 
-        # get sneaker_ids from the Sneakers table
+        # get sneaker_ids, brands, and model names from the Sneakers table
         sneaker_query = "SELECT sneaker_id, brand, model_name FROM Sneakers"
         sneaker_cursor = db.execute_query(db_connection=db_connection, query=sneaker_query)
         sneaker_results = list(sneaker_cursor.fetchall())
 
-        # get order_ids from the Orders table
+        # get order_ids and customer names from the Orders and Customers tables
         order_query = """SELECT order_id, name FROM Orders
                          INNER JOIN Customers
                          ON Orders.customer_id = Customers.customer_id"""

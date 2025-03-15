@@ -27,7 +27,7 @@ def raffles():
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
 
-        # get the sneaker_id from the Sneakers table
+        # get the sneaker_ids, brands, and model names from the Sneakers table
         sneaker_query = "SELECT sneaker_id, brand, model_name FROM Sneakers"
         cursor = db.execute_query(db_connection=db_connection, query=sneaker_query)
         sneaker_data = cursor.fetchall()
