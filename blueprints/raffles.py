@@ -21,12 +21,14 @@ def raffles():
 
     if request.method == "GET":
         # display the data from the database in the table
-        query = "SELECT * FROM Raffles"
+        query = """SELECT *, brand, model_name FROM Raffles
+                   INNER JOIN Sneakers
+                   ON Raffles.sneaker_id = Sneakers.sneaker_id"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
 
         # get the sneaker_id from the Sneakers table
-        sneaker_query = "SELECT sneaker_id FROM Sneakers"
+        sneaker_query = "SELECT sneaker_id, brand, model_name FROM Sneakers"
         cursor = db.execute_query(db_connection=db_connection, query=sneaker_query)
         sneaker_data = cursor.fetchall()
 

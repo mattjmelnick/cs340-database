@@ -30,10 +30,10 @@
             <strong>Add Drawing</strong>
         </legend>
         <fieldset>
-            <label for="drawingRaffleID">Raffle ID</label>
+            <label for="drawingRaffleID">Raffle</label>
             <select name="drawingRaffleID" id="drawingRaffleID">
                 {% for raffle in raffles %}
-                    <option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_id'] }}</option>
+                    <option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_description'] }}</option>
                 {% endfor %}
             </select>
             <label for="drawingDate">Draw Date</label>
@@ -62,10 +62,10 @@
         <fieldset>
             <label for="drawingIDUpdate">Drawing ID</label>
             <span id="drawingIDUpdate"></span>
-            <label for="drawingRaffleIDUpdate">Raffle ID</label>
+            <label for="drawingRaffleIDUpdate">Raffle</label>
             <select name="drawingRaffleIDUpdate" id="drawingRaffleIDUpdate">
                 {% for raffle in raffles %}
-                    <option value="{{raffle.raffle_id}}">{{raffle.raffle_id}}</option>
+                    <option value="{{ raffle.raffle_id}}">{{ raffle.raffle_description }}</option>
                 {% endfor %}
             </select required>
             <label for="drawingDateUpdate">Draw Date</label>
@@ -105,6 +105,7 @@
             <tr>
                 <th>Drawing ID</th>
                 <th>Raffle ID</th>
+                <th>Raffle Description</th>
                 <th>Draw Date</th>
                 <th>Draw Day</th>
                 <th>Edit</th>
@@ -120,6 +121,7 @@
 		  			<!-- place each column value in table cells -->
 					<td>{{ drawing.drawing_id }}</td>
 					<td>{{ drawing.raffle_id}}</td>
+					<td>{{ drawing.raffle_description}}</td>
 					<td>{{ drawing.draw_date}}</td>
 					<td>{{ drawing.draw_day }}</td>
 	   				<!-- The JavaScript function implementations are original -->

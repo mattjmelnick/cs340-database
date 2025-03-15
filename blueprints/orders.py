@@ -22,12 +22,14 @@ def orders():
 
     if request.method == "GET":
         # display the data from the database in the table
-        query = "SELECT * FROM Orders"
+        query = """SELECT *, name FROM Orders
+                   INNER JOIN Customers
+                   ON Orders.customer_id = Customers.customer_id""" 
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
 
         # get the customer_ids from the Customers table
-        customer_query = "SELECT customer_id FROM Customers"
+        customer_query = "SELECT customer_id, name FROM Customers" 
         customer_cursor = db.execute_query(db_connection=db_connection, query=customer_query)
         customer_results = customer_cursor.fetchall()
 

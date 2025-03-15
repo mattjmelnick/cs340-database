@@ -22,12 +22,14 @@ def drawings():
 
     if request.method == "GET":
         # display the data from the database in the table
-        query = "SELECT * FROM Drawings"
+        query = """SELECT *, raffle_description FROM Drawings
+                   INNER JOIN Raffles
+                   ON Drawings.raffle_id = Raffles.raffle_id"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
 
         # get the raffle_ids from the Raffles table
-        fetch_raffle_query = "SELECT raffle_id FROM Raffles"
+        fetch_raffle_query = "SELECT raffle_id, raffle_description FROM Raffles"
         fetch_raffle_cursor = db.execute_query(db_connection=db_connection, query=fetch_raffle_query)
         raffle_data = list(fetch_raffle_cursor.fetchall())
 

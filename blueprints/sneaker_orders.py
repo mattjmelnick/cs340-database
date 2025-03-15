@@ -23,17 +23,25 @@ def sneaker_orders():
 
     if request.method == "GET":
         # display the data from the database in the table
-        query = "SELECT * FROM SneakerOrders"
+        query = """SELECT *, brand, model_name, name FROM SneakerOrders
+                   INNER JOIN Sneakers
+                   ON SneakerOrders.sneaker_id = Sneakers.sneaker_id
+                   INNER JOIN Orders
+                   ON SneakerOrders.order_id = Orders.order_id
+                   INNER JOIN Customers
+                   ON Orders.customer_id = Customers.customer_id"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
 
         # get sneaker_ids from the Sneakers table
-        sneaker_query = "SELECT sneaker_id FROM Sneakers"
+        sneaker_query = "SELECT sneaker_id, brand, model_name FROM Sneakers"
         sneaker_cursor = db.execute_query(db_connection=db_connection, query=sneaker_query)
         sneaker_results = list(sneaker_cursor.fetchall())
 
         # get order_ids from the Orders table
-        order_query = "SELECT order_id FROM Orders"
+        order_query = """SELECT order_id, name FROM Orders
+                         INNER JOIN Customers
+                         ON Orders.customer_id = Customers.customer_id"""
         order_cursor = db.execute_query(db_connection=db_connection, query=order_query)
         order_results = list(order_cursor.fetchall())
 

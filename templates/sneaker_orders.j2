@@ -30,17 +30,17 @@
             <strong>Add Sneaker Order</strong>
         </legend>
         <fieldset>
-            <label for="soOrderID">Order ID</label>
+            <label for="soOrderID">Customer</label>
             <select name="soOrderID" id="soOrderID">
                 {% for order in orders %}
-                	<option value="{{ order.order_id }}">{{ order.order_id }}</option>
+                	<option value="{{ order.order_id }}">{{ order.name }}</option>
 				{% endfor %}
             </select required>
-            <label for="soOrderID">Sneaker ID</label>
+            <label for="soOrderID">Sneaker</label>
             <select name="soSneakerID" id="soSneakerID">
                 <option value="0">NULL</option>
                 {% for sneaker in sneakers %}
-                	<option value="{{ sneaker.sneaker_id }}">{{ sneaker.sneaker_id }}</option>
+                	<option value="{{ sneaker.sneaker_id }}">{{ sneaker.brand }} {{ sneaker.model_name }}</option>
 				{% endfor %}
             </select required>
             <label for="soQuantity">Quantity</label>
@@ -59,17 +59,17 @@
         <fieldset>
             <label for="soIDUpdate">Sneaker Order ID</label>
             <span id="soIDUpdate"></span>
-            <label for="soOrderIDUpdate">Order ID</label>
+            <label for="soOrderIDUpdate">Customer </label>
             <select name="soOrderIDUpdate" id="soOrderIDUpdate">
                 {% for order in orders %}
-                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }}</option>
+                	<option value="{{ order['order_id'] }}">{{ order['name'] }}</option>
 				{% endfor %}
             </select required>
-            <label for="soSneakerIDUpdate">Sneaker ID</label>
+            <label for="soSneakerIDUpdate">Sneaker</label>
             <select name="soSneakerIDUpdate" id="soSneakerIDUpdate">
                 <option value="0">NULL</option>
                 {% for sneaker in sneakers %}
-                	<option value="{{ sneaker['sneaker_id'] }}">{{ sneaker['sneaker_id'] }}</option>
+                	<option value="{{ sneaker['sneaker_id'] }}">{{ sneaker['brand'] }} {{ sneaker['model_name'] }}</option>
 				{% endfor %}
             </select required>
             <label for="soQuantityUpdate">Quantity</label>
@@ -99,7 +99,9 @@
             <tr>
                 <th>Sneaker Order ID</th>
                 <th>Order ID</th>
+                <th>Customer</th>
                 <th>Sneaker ID</th>
+                <th>Sneaker</th>
                 <th>Quantity</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -113,7 +115,9 @@
             <tr>
                 <td>{{ sneaker_order.sneaker_order_id }}</td>
                 <td>{{ sneaker_order.order_id }}</td>
+                <td>{{ sneaker_order.name}}</td>
                 <td>{{ sneaker_order.sneaker_id }}</td>
+                <td>{{ sneaker_order.brand }} {{ sneaker_order.model_name }}</td>
                 <td>{{ sneaker_order.quantity }}</td>
 	   			<!-- The JavaScript function implementations are original -->
                 <!-- pass the sneaker_order attributes to the delete form -->

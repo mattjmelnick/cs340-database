@@ -30,16 +30,16 @@
             <strong>Add Customer Raffle</strong>
         </legend>
         <fieldset>
-            <label for="customerRaffleID">Raffle ID</label>
+            <label for="customerRaffleID">Raffle</label>
             <select name="customerRaffleID" id="customerRaffleID">
                 {% for raffle in raffles %}
-                    <option value="{{raffle.raffle_id}}">{{raffle.raffle_id}}</option>
+                    <option value="{{ raffle.raffle_id }}">{{ raffle.raffle_description }}</option>
                 {% endfor %}
             </select required>
-            <label for="customerCustomerID">Customer ID</label>
+            <label for="customerCustomerID">Customer</label>
             <select name="customerCustomerID" id="customerCustomerID">
                 {% for customer in customers %}
-                    <option value="{{customer.customer_id}}">{{customer.customer_id}}</option>
+                    <option value="{{ customer.customer_id }}">{{ customer.name }}</option>
                 {% endfor %}
             </select required>
             <label for="customerWonRaffle">Won Raffle</label>
@@ -61,16 +61,16 @@
         <fieldset>
             <label for="crIDUpdate">Customer Raffle ID</label>
             <span id="crIDUpdate"></span>
-            <label for="crRaffleIDUpdate">Raffle ID</label>
+            <label for="crRaffleIDUpdate">Raffle</label>
             <select name="crRaffleIDUpdate" id="crRaffleIDUpdate">
                 {% for raffle in raffles %}
-                    <option value="{{raffle.raffle_id}}">{{raffle.raffle_id}}</option>
+                    <option value="{{ raffle.raffle_id }}">{{ raffle.raffle_description }}</option>
                 {% endfor %}
             </select required>
-            <label for="crCustomerIDUpdate">Customer ID</label>
+            <label for="crCustomerIDUpdate">Customer</label>
             <select name="crCustomerIDUpdate" id="crCustomerIDUpdate">
                 {% for customer in customers %}
-                    <option value="{{customer.customer_id}}">{{customer.customer_id}}</option>
+                    <option value="{{ customer.customer_id }}">{{ customer.name }}</option>
                 {% endfor %}
             </select required>
             <label for="crWonRaffleUpdate">Won Raffle</label>
@@ -103,7 +103,9 @@
             <tr>
                 <th>Customer Raffle ID</th>
                 <th>Raffle ID</th>
+                <th>Raffle</th>
                 <th>Customer ID</th>
+                <th>Customer</th>
                 <th>Won Raffle</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -118,7 +120,9 @@
 		  			<!-- place each column value in table cells -->
 					<td>{{ customer_raffle.customer_raffle_id }}</td>
 					<td>{{ customer_raffle.raffle_id}}</td>
+					<td>{{ customer_raffle.raffle_description}}</td>
 					<td>{{ customer_raffle.customer_id}}</td>
+					<td>{{ customer_raffle.name}}</td>
 					<td>{{ customer_raffle.won_raffle }}</td>
 	   				<!-- The JavaScript function implementations are original -->
 		  			<!-- pass the customer_raffle attributes to the edit form -->

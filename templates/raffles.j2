@@ -33,11 +33,11 @@
             <label for="raffleSneakerID">Sneaker</label>
             <select name="raffleSneakerID" id="raffleSneakerID">
                 {% for sneaker in sneakers %}
-                    <option value="{{sneaker.sneaker_id}}">{{sneaker.sneaker_id}}</option>
+                    <option value="{{ sneaker.sneaker_id }}">{{ sneaker.name }} {{ sneaker.model_name }}</option>
                 {% endfor %}    
             </select required>
             <label for="raffleDescription">Raffle Description</label>
-            <textarea name="raffleDescription" id="raffleDescription" rows="5" cols="30"></textarea>
+            <textarea name="raffleDescription" id="raffleDescription" rows="5" cols="30" required></textarea>
             <label for="raffleEntryCost">Entry Cost</label>
             <input type="number" name="raffleEntryCost" id="raffleEntryCost" required>
             <br>
@@ -54,10 +54,10 @@
         <fieldset>
             <label for="raffleIDUpdate">Raffle ID</label>
             <span id="raffleIDUpdate">raffleIDUpdate</span>
-            <label for="raffleSneakerIDUpdate">Sneaker ID</label>
+            <label for="raffleSneakerIDUpdate">Sneaker</label>
             <select name="raffleSneakerIDUpdate" id="raffleSneakerIDUpdate">
                 {% for sneaker in sneakers %}
-                    <option value="{{sneaker.sneaker_id}}">{{sneaker.sneaker_id}}</option>
+                    <option value="{{ sneaker.sneaker_id }}">{{ sneaker.brand }} {{ sneaker.model_name }}</option>
                 {% endfor %}
             </select required>
             <label for="raffleDescriptionUpdate">Raffle Description</label>
@@ -89,6 +89,7 @@
             <tr>
                 <th>Raffle ID</th>
                 <th>Sneaker ID</th>
+                <th>Sneaker</th>
                 <th>Raffle Description</th>
                 <th>Entry Cost</th>
                 <th>Edit</th>
@@ -104,6 +105,7 @@
 		  			<!-- place each column value in table cells -->
 					<td>{{ raffle.raffle_id }}</td>
 					<td>{{ raffle.sneaker_id}}</td>
+					<td>{{ raffle.brand }} {{ raffle.model_name }}</td>
 					<td>{{ raffle.raffle_description}}</td>
 					<td>{{ raffle.entry_cost }}</td>
 

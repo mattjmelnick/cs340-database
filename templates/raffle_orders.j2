@@ -30,18 +30,18 @@
             <strong>Add Raffle Order</strong>
         </legend>
         <fieldset>
-            <label for="roOrderID">Order ID</label>
+            <label for="roOrderID">Customer</label>
             <select name="roOrderID" id="roOrderID">
 		 		<!-- The for loop code is based on the CS 340 Flask Starter App -->
-				{% for order in order_ids %}
-                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }}</option>
+				{% for order in orders %}
+                	<option value="{{ order['order_id'] }}">{{ order['name'] }}</option>
 				{% endfor %}
             </select>
-            <label for="roRaffleID">Raffle ID</label>
+            <label for="roRaffleID">Raffle</label>
             <select name="roRaffleID" id="roRaffleID">
                 <option value="0">NULL</option>
-				{% for raffle in raffle_ids %}
-                	<option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_id'] }}</option>
+				{% for raffle in raffles %}
+                	<option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_description'] }}</option>
 				{% endfor %}
             </select>
             <br>
@@ -58,11 +58,18 @@
         <fieldset>
             <label for="roIDUpdate">Raffle Order ID</label>
             <span id="roIDUpdate"></span>
-            <label for="roOrderIDUpdate">Order ID</label>
+            <label for="roOrderIDUpdate">Customer</label>
             <select name="roOrderIDUpdate" id="roOrderIDUpdate">
+                {% for order in orders %}
+                	<option value="{{ order['order_id'] }}">{{ order['name'] }}</option>
+				{% endfor %}
             </select required>
-            <label for="roRaffleIDUpdate">Raffle ID</label>
+            <label for="roRaffleIDUpdate">Raffle</label>
             <select name="roRaffleIDUpdate" id="roRaffleIDUpdate">
+                <option value="0">NULL</option>
+                {% for raffle in raffles %}
+                	<option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_description'] }}</option>
+				{% endfor %}
             </select required>
             <br>
             <br>
@@ -89,7 +96,9 @@
             <tr>
                 <th>Raffle Order ID</th>
                 <th>Order ID</th>
+                <th>Customer</th>
                 <th>Raffle ID</th>
+                <th>Raffle Description</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -102,15 +111,15 @@
             <tr>
                 <td>{{ raffle_order.raffle_order_id }}</td>
                 <td>{{ raffle_order.order_id }}</td>
+                <td>{{ raffle_order.name }}</td>
                 <td>{{ raffle_order.raffle_id }}</td>
+                <td>{{ raffle_order.raffle_description }}</td>
 	   			<!-- The JavaScript function implementations are original -->
 		  		<!-- pass the raffle_order attributes to the edit form -->
                 <td><button onclick="showROUpdate(
                     '{{ raffle_order['raffle_order_id'] }}',
                     '{{ raffle_order['order_id'] }}',
-                    '{{ raffle_order['raffle_id'] }}',
-					{{ order_ids }},
-					{{ raffle_ids }})">Edit</button></td>
+                    '{{ raffle_order['raffle_id'] }}')">Edit</button></td>
                 <!-- pass the raffle_order_id to the delete form -->
                 <td><button onclick="showRODelete(
 					'{{ raffle_order['raffle_order_id'] }}')">Delete</button></td>

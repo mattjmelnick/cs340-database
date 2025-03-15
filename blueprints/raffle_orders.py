@@ -20,22 +20,30 @@ def raffle_orders():
         return redirect(url_for('raffle_orders.raffle_orders'))
 
     if request.method == "GET":
-        query = "SELECT * FROM RaffleOrders"
+        query = """SELECT *, name, raffle_description FROM RaffleOrders
+                   INNER JOIN Raffles
+                   ON RaffleOrders.raffle_id = Raffles.raffle_id
+                   INNER JOIN Orders
+                   ON RaffleOrders.order_id = Orders.order_id
+                   INNER JOIN Customers
+                   ON Orders.customer_id = Customers.customer_id"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         raffle_order_data = list(cursor.fetchall())
 
         # get the list of order ids from the Orders table
-        order_query = "SELECT order_id FROM Orders"
+        order_query = """SELECT order_id, name FROM Orders
+                         INNER JOIN Customers
+                         ON Orders.customer_id = Customers.customer_id"""
         cursor = db.execute_query(db_connection=db_connection, query=order_query)
         order_data = list(cursor.fetchall())
 
         # get the list of raffle ids from the Raffles table
-        raffle_query = "SELECT raffle_id FROM Raffles"
+        raffle_query = "SELECT raffle_id, raffle_description FROM Raffles"
         cursor = db.execute_query(db_connection=db_connection, query=raffle_query)
         raffle_data = list(cursor.fetchall())
         
         return render_template("raffle_orders.j2", raffle_orders=raffle_order_data,
-                        order_ids=order_data, raffle_ids=raffle_data)
+                        orders=order_data, raffles=raffle_data)
 
 @raffle_orders_bp.route('/edit_raffle_order/<int:raffle_order_id>', methods=["POST"])
 def edit_raffle_order(raffle_order_id):

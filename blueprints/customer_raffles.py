@@ -21,7 +21,11 @@ def customers_raffles():
 
     if request.method == "GET":
         # display the data from the database in the table
-        query = "SELECT * FROM CustomerRaffles"
+        query = """SELECT *, name, raffle_description FROM CustomerRaffles
+                   INNER JOIN Customers
+                   ON CustomerRaffles.customer_id = Customers.customer_id
+                   INNER JOIN Raffles
+                   ON CustomerRaffles.raffle_id = Raffles.raffle_id"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
 
