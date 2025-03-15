@@ -18,17 +18,29 @@ SELECT *, raffle_description FROM Drawings
 INNER JOIN Raffles
 ON Drawings.raffle_id = Raffles.raffle_id;
 
+-- get the raffle id and raffle description from Raffles table
+-- used for adding and updating a Raffle in Drawings table
+SELECT raffle_id, raffle_description FROM Raffles
+
 -- get raffle attributes from the Raffles table
 -- get brand and model name from Sneakers table
 SELECT *, brand, model_name FROM Raffles
 INNER JOIN Sneakers
 ON Raffles.sneaker_id = Sneakers.sneaker_id;
 
+-- get the sneaker ids, brands, and model names from the Sneakers table
+-- used for adding and updating a Sneaker in the Raffles table
+SELECT sneaker_id, brand, model_name FROM Sneakers
+
 -- get order attributes from the Orders table
 -- get customer name from Customers table
 SELECT *, name FROM Orders
 INNER JOIN Customers
 ON Orders.customer_id = Customers.customer_id;
+
+-- get customer ids and names from the Customers table
+-- used for adding and updating a Customer in the Orders table
+SELECT customer_id, name FROM Customers
 
 -- get raffle order attributes from the RaffleOrders table
 -- get customer name from Customers table
@@ -41,16 +53,36 @@ ON RaffleOrders.order_id = Orders.order_id
 INNER JOIN Customers
 ON Orders.customer_id = Customers.customer_id;
 
+-- get the order id and customer names from the Orders and Customers tables
+-- used for adding and updating an Order in the RaffleOrders table
+SELECT order_id, name FROM Orders
+INNER JOIN Customers
+ON Orders.customer_id = Customers.customer_id
+
+-- get the raffle ids and raffle descriptions from the Raffles table
+-- used for adding and updating a Raffle in the RaffleOrders table
+SELECT raffle_id, raffle_description FROM Raffles
+
 -- get sneaker order attributes from the SneakerOrders table
--- get brand and model name from Sneakers table
--- get customer name from Customers table
+-- get brands and model names from Sneakers table
+-- get customer names from Customers table
 SELECT *, brand, model_name, name FROM SneakerOrders
-INNER JOIN Sneakers
+LEFT JOIN Sneakers
 ON SneakerOrders.sneaker_id = Sneakers.sneaker_id
 INNER JOIN Orders
 ON SneakerOrders.order_id = Orders.order_id
 INNER JOIN Customers
 ON Orders.customer_id = Customers.customer_id;
+
+-- get the sneaker ids, brands, model name from the Sneakers table
+-- used for adding and updating a Sneaker in the SneakerOrders table
+SELECT sneaker_id, brand, model_name FROM Sneakers
+
+-- get the order ids and customer names from the Orders and Customers table
+-- used for adding and updating an Order in the SneakerOrders table
+SELECT order_id, name FROM Orders
+INNER JOIN Customers
+ON Orders.customer_id = Customers.customer_id
 
 -- get customer raffle attributes from the CustomerRaffles table
 -- get customer name from Customers table
@@ -60,6 +92,14 @@ INNER JOIN Customers
 ON CustomerRaffles.customer_id = Customers.customer_id
 INNER JOIN Raffles
 ON CustomerRaffles.raffle_id = Raffles.raffle_id;
+
+-- get customer attributes from the Customers table
+-- used for adding and updating a Customer in the CustomerRaffles table
+SELECT * FROM Customers
+
+-- get the raffle attributes from the Raffles table
+-- used for adding and updating a Raffle in the CustomerRaffles table
+SELECT * FROM Customers
 
 -- INSERT Queries to Create a New Table Entry Based on User Input
 -- add a new customer entry
