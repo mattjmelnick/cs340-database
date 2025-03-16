@@ -30,11 +30,11 @@
             <strong>Add Raffle Order</strong>
         </legend>
         <fieldset>
-            <label for="roOrderID">Customer</label>
+            <label for="roOrderID">Order ID - Customer</label>
             <select name="roOrderID" id="roOrderID">
 		 		<!-- The for loop code is based on the CS 340 Flask Starter App -->
 				{% for order in orders %}
-                	<option value="{{ order['order_id'] }}">{{ order['name'] }}</option>
+                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }} - {{ order['name'] }}</option>
 				{% endfor %}
             </select>
             <label for="roRaffleID">Raffle</label>
@@ -58,10 +58,10 @@
         <fieldset>
             <label for="roIDUpdate">Raffle Order ID</label>
             <span id="roIDUpdate"></span>
-            <label for="roOrderIDUpdate">Customer</label>
+            <label for="roOrderIDUpdate">Order ID - Customer</label>
             <select name="roOrderIDUpdate" id="roOrderIDUpdate">
                 {% for order in orders %}
-                	<option value="{{ order['order_id'] }}">{{ order['name'] }}</option>
+                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }} - {{ order['name'] }}</option>
 				{% endfor %}
             </select required>
             <label for="roRaffleIDUpdate">Raffle</label>

@@ -30,10 +30,10 @@
             <strong>Add Sneaker Order</strong>
         </legend>
         <fieldset>
-            <label for="soOrderID">Customer</label>
+            <label for="soOrderID">Order ID - Customer</label>
             <select name="soOrderID" id="soOrderID">
                 {% for order in orders %}
-                	<option value="{{ order.order_id }}">{{ order.name }}</option>
+                	<option value="{{ order.order_id }}">{{ order.order_id }} - {{ order.name }}</option>
 				{% endfor %}
             </select required>
             <label for="soOrderID">Sneaker</label>
@@ -59,10 +59,10 @@
         <fieldset>
             <label for="soIDUpdate">Sneaker Order ID</label>
             <span id="soIDUpdate"></span>
-            <label for="soOrderIDUpdate">Customer </label>
+            <label for="soOrderIDUpdate">Order ID - Customer</label>
             <select name="soOrderIDUpdate" id="soOrderIDUpdate">
                 {% for order in orders %}
-                	<option value="{{ order['order_id'] }}">{{ order['name'] }}</option>
+                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }} - {{ order['name'] }}</option>
 				{% endfor %}
             </select required>
             <label for="soSneakerIDUpdate">Sneaker</label>
