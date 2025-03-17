@@ -1,5 +1,10 @@
+<!-- The for loop code is based on the CS 340 Flask Starter App -->
+<!-- Source date: 2/26/25 -->
+<!-- Adapted from: -->
+<!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
 <html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +13,7 @@
     <script src="./static/js/main.js"></script>
     <script src="./static/js/raffle_orders.js"></script>
 </head>
+
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
     <nav>
@@ -23,7 +29,7 @@
     </nav>
     <h2>Raffle Orders</h2>
     <h3><strong>Manage Raffle Order Transactions</strong></h3>
-	<!-- Add a new RaffleOrder to the database -->
+    <!-- Add a new RaffleOrder to the database -->
     <button class="addBtn" onclick="showAddForm('#raffleOrderAddForm')">Add New Raffle Order Entry</button>
     <form action="raffle_orders" method="POST" id="raffleOrderAddForm" style="display: none">
         <legend>
@@ -32,25 +38,25 @@
         <fieldset>
             <label for="roOrderID">Order ID - Customer</label>
             <select name="roOrderID" id="roOrderID">
-		 		<!-- The for loop code is based on the CS 340 Flask Starter App -->
-				{% for order in orders %}
-                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }} - {{ order['name'] }}</option>
-				{% endfor %}
+                <!-- The for loop code is based on the CS 340 Flask Starter App -->
+                {% for order in orders %}
+                <option value="{{ order['order_id'] }}">{{ order['order_id'] }} - {{ order['name'] }}</option>
+                {% endfor %}
             </select>
             <label for="roRaffleID">Raffle</label>
             <select name="roRaffleID" id="roRaffleID">
                 <option value="0">NULL</option>
-				{% for raffle in raffles %}
-                	<option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_description'] }}</option>
-				{% endfor %}
+                {% for raffle in raffles %}
+                <option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_description'] }}</option>
+                {% endfor %}
             </select>
             <br>
             <br>
             <button type="submit">Add Raffle Order</button>
-			<button type="button" onclick="cancelForm('#raffleOrderAddForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#raffleOrderAddForm')">Cancel</button>
         </fieldset>
     </form>
-	<!-- Update a RaffleOrder in the database -->
+    <!-- Update a RaffleOrder in the database -->
     <form id="raffleOrderUpdateForm" method="POST" style="display: none">
         <legend>
             <strong>Update Raffle Order</strong>
@@ -61,23 +67,23 @@
             <label for="roOrderIDUpdate">Order ID - Customer</label>
             <select name="roOrderIDUpdate" id="roOrderIDUpdate">
                 {% for order in orders %}
-                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }} - {{ order['name'] }}</option>
-				{% endfor %}
+                <option value="{{ order['order_id'] }}">{{ order['order_id'] }} - {{ order['name'] }}</option>
+                {% endfor %}
             </select required>
             <label for="roRaffleIDUpdate">Raffle</label>
             <select name="roRaffleIDUpdate" id="roRaffleIDUpdate">
                 <option value="0">NULL</option>
                 {% for raffle in raffles %}
-                	<option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_description'] }}</option>
-				{% endfor %}
+                <option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_description'] }}</option>
+                {% endfor %}
             </select required>
             <br>
             <br>
             <button type="submit">Update Raffle Order</button>
-			<button type="button" onclick="cancelForm('#raffleOrderUpdateForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#raffleOrderUpdateForm')">Cancel</button>
         </fieldset>
     </form>
-	<!-- Delete a RaffleOrder from the database -->
+    <!-- Delete a RaffleOrder from the database -->
     <form id="raffleOrderDeleteForm" method="POST" style="display: none">
         <legend>
             <strong>Delete Raffle Order</strong>
@@ -88,7 +94,7 @@
             <br>
             <br>
             <button type="submit">Delete Raffle Order</button>
-			<button type="button" onclick="cancelForm('#raffleOrderDeleteForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#raffleOrderDeleteForm')">Cancel</button>
         </fieldset>
     </form>
     <table>
@@ -104,21 +110,17 @@
             </tr>
         </thead>
         <tbody>
-            <!-- The for loop code is based on the CS 340 Flask Starter App -->
-            <!-- Source date: 2/26/25 -->
-            <!-- Adapted from: -->
-            <!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
             <!-- access the dictionary data passed from the raffle_order blueprint -->
             <!-- iterate through the list of dictionaries -->
-			{% for raffle_order in raffle_orders %}
+            {% for raffle_order in raffle_orders %}
             <tr>
                 <td>{{ raffle_order.raffle_order_id }}</td>
                 <td>{{ raffle_order.order_id }}</td>
                 <td>{{ raffle_order.name }}</td>
                 <td>{{ raffle_order.raffle_id }}</td>
                 <td>{{ raffle_order.raffle_description }}</td>
-	   			<!-- The JavaScript function implementations are original -->
-		  		<!-- pass the raffle_order attributes to the edit form -->
+                <!-- The JavaScript function implementations are original -->
+                <!-- pass the raffle_order attributes to the edit form -->
                 <td><button onclick="showROUpdate(
                     '{{ raffle_order['raffle_order_id'] }}',
                     '{{ raffle_order['order_id'] }}',
@@ -127,8 +129,9 @@
                 <td><button onclick="showRODelete(
 					'{{ raffle_order['raffle_order_id'] }}')">Delete</button></td>
             </tr>
-			{% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 </body>
+
 </html>

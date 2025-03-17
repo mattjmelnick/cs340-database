@@ -1,5 +1,10 @@
+<!-- The for loop code is based on the CS 340 Flask Starter App -->
+<!-- Source date: 3/8/25 -->
+<!-- Adapted from: -->
+<!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
 <html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +13,7 @@
     <script src="./static/js/main.js"></script>
     <script src="./static/js/sneaker_orders.js"></script>
 </head>
+
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
     <nav>
@@ -23,7 +29,7 @@
     </nav>
     <h2>Sneaker Orders</h2>
     <h3><strong>Manage Sneaker Order Transactions</strong></h3>
-	<!-- Add a new SneakerOrder to the database -->
+    <!-- Add a new SneakerOrder to the database -->
     <button class="addBtn" onclick="showAddForm('#sneakerOrderAddForm')">Add New Sneaker Order Entry</button>
     <form action="sneaker_orders" method="POST" id="sneakerOrderAddForm" style="display: none">
         <legend>
@@ -33,22 +39,22 @@
             <label for="soOrderID">Order ID - Customer</label>
             <select name="soOrderID" id="soOrderID">
                 {% for order in orders %}
-                	<option value="{{ order.order_id }}">{{ order.order_id }} - {{ order.name }}</option>
-				{% endfor %}
+                <option value="{{ order.order_id }}">{{ order.order_id }} - {{ order.name }}</option>
+                {% endfor %}
             </select required>
             <label for="soOrderID">Sneaker</label>
             <select name="soSneakerID" id="soSneakerID">
                 <option value="0">NULL</option>
                 {% for sneaker in sneakers %}
-                	<option value="{{ sneaker.sneaker_id }}">{{ sneaker.brand }} {{ sneaker.model_name }}</option>
-				{% endfor %}
+                <option value="{{ sneaker.sneaker_id }}">{{ sneaker.brand }} {{ sneaker.model_name }}</option>
+                {% endfor %}
             </select required>
             <label for="soQuantity">Quantity</label>
             <input type="number" name="soQuantity" required>
             <br>
             <br>
             <button type="submit">Add Sneaker Order</button>
-			<button type="button" onclick="cancelForm('#sneakerOrderAddForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#sneakerOrderAddForm')">Cancel</button>
         </fieldset>
     </form>
     <!-- Update a Sneaker Order entry in the database -->
@@ -62,22 +68,22 @@
             <label for="soOrderIDUpdate">Order ID - Customer</label>
             <select name="soOrderIDUpdate" id="soOrderIDUpdate">
                 {% for order in orders %}
-                	<option value="{{ order['order_id'] }}">{{ order['order_id'] }} - {{ order['name'] }}</option>
-				{% endfor %}
+                <option value="{{ order['order_id'] }}">{{ order['order_id'] }} - {{ order['name'] }}</option>
+                {% endfor %}
             </select required>
             <label for="soSneakerIDUpdate">Sneaker</label>
             <select name="soSneakerIDUpdate" id="soSneakerIDUpdate">
                 <option value="0">NULL</option>
                 {% for sneaker in sneakers %}
-                	<option value="{{ sneaker['sneaker_id'] }}">{{ sneaker['brand'] }} {{ sneaker['model_name'] }}</option>
-				{% endfor %}
+                <option value="{{ sneaker['sneaker_id'] }}">{{ sneaker['brand'] }} {{ sneaker['model_name'] }}</option>
+                {% endfor %}
             </select required>
             <label for="soQuantityUpdate">Quantity</label>
             <input type="number" name="soQuantityUpdate" id="soQuantityUpdate" value="" required>
             <br>
             <br>
             <button type="submit">Update Sneaker Order</button>
-			<button type="button" onclick="cancelForm('#sneakerOrderUpdateForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#sneakerOrderUpdateForm')">Cancel</button>
         </fieldset>
     </form>
     <!-- Delete a Sneaker Order entry from the database -->
@@ -91,7 +97,7 @@
             <br>
             <br>
             <button type="submit">Delete Sneaker Order</button>
-			<button type="button" onclick="cancelForm('#sneakerOrderDeleteForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#sneakerOrderDeleteForm')">Cancel</button>
         </fieldset>
     </form>
     <table>
@@ -108,13 +114,9 @@
             </tr>
         </thead>
         <tbody>
-		 	<!-- The for loop code is based on the CS 340 Flask Starter App -->
-            <!-- Source date: 3/8/25 -->
-            <!-- Adapted from: -->
-            <!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
             <!-- access the dictionary data passed from the sneaker_order blueprint -->
             <!-- iterate through the list of dictionaries -->
-			{% for sneaker_order in sneaker_orders %}
+            {% for sneaker_order in sneaker_orders %}
             <tr>
                 <td>{{ sneaker_order.sneaker_order_id }}</td>
                 <td>{{ sneaker_order.order_id }}</td>
@@ -122,7 +124,7 @@
                 <td>{{ sneaker_order.sneaker_id }}</td>
                 <td>{{ sneaker_order.brand }} {{ sneaker_order.model_name }}</td>
                 <td>{{ sneaker_order.quantity }}</td>
-	   			<!-- The JavaScript function implementations are original -->
+                <!-- The JavaScript function implementations are original -->
                 <!-- pass the sneaker_order attributes to the delete form -->
                 <td><button onclick="showSOUpdate(
                     '{{ sneaker_order['sneaker_order_id'] }}',
@@ -133,8 +135,9 @@
                 <td><button onclick="showSODelete(
 					'{{ sneaker_order['sneaker_order_id'] }}')">Delete</button></td>
             </tr>
-			{% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 </body>
+
 </html>

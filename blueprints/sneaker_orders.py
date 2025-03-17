@@ -1,6 +1,17 @@
 from flask import Blueprint, render_template, request, redirect, url_for, g
 import database.db_connector as db
 
+"""
+Citation for this file:
+Date: 3/8/25 
+All blueprint pages are modified from:
+https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
+
+Additional resource used:
+https://realpython.com/flask-blueprint/
+"""
+
+
 sneaker_orders_bp = Blueprint('sneaker_orders', __name__)
 
 @sneaker_orders_bp.route('/sneaker_orders', methods=["GET", "POST"])

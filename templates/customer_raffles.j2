@@ -1,5 +1,10 @@
+<!-- The for loop code is based on the CS 340 Flask Starter App -->
+<!-- Source date: 3/8/25 -->
+<!-- Adapted from: -->
+<!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
 <html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +13,7 @@
     <script src="./static/js/main.js"></script>
     <script src="./static/js/customer_raffles.js"></script>
 </head>
+
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
     <nav>
@@ -33,13 +39,13 @@
             <label for="customerRaffleID">Raffle</label>
             <select name="customerRaffleID" id="customerRaffleID">
                 {% for raffle in raffles %}
-                    <option value="{{ raffle.raffle_id }}">{{ raffle.raffle_description }}</option>
+                <option value="{{ raffle.raffle_id }}">{{ raffle.raffle_description }}</option>
                 {% endfor %}
             </select required>
             <label for="customerCustomerID">Customer</label>
             <select name="customerCustomerID" id="customerCustomerID">
                 {% for customer in customers %}
-                    <option value="{{ customer.customer_id }}">{{ customer.name }}</option>
+                <option value="{{ customer.customer_id }}">{{ customer.name }}</option>
                 {% endfor %}
             </select required>
             <label for="customerWonRaffle">Won Raffle</label>
@@ -50,7 +56,7 @@
             <br>
             <br>
             <button type="submit">Add Customer Raffle</button>
-			<button type="button" onclick="cancelForm('#customerRaffleAddForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#customerRaffleAddForm')">Cancel</button>
         </fieldset>
     </form>
     <!-- Update a CustomerRaffle entry in the database -->
@@ -64,13 +70,13 @@
             <label for="crRaffleIDUpdate">Raffle</label>
             <select name="crRaffleIDUpdate" id="crRaffleIDUpdate">
                 {% for raffle in raffles %}
-                    <option value="{{ raffle.raffle_id }}">{{ raffle.raffle_description }}</option>
+                <option value="{{ raffle.raffle_id }}">{{ raffle.raffle_description }}</option>
                 {% endfor %}
             </select required>
             <label for="crCustomerIDUpdate">Customer</label>
             <select name="crCustomerIDUpdate" id="crCustomerIDUpdate">
                 {% for customer in customers %}
-                    <option value="{{ customer.customer_id }}">{{ customer.name }}</option>
+                <option value="{{ customer.customer_id }}">{{ customer.name }}</option>
                 {% endfor %}
             </select required>
             <label for="crWonRaffleUpdate">Won Raffle</label>
@@ -81,7 +87,7 @@
             <br>
             <br>
             <button type="submit">Update Customer Raffle</button>
-			<button type="button" onclick="cancelForm('#customerRaffleUpdateForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#customerRaffleUpdateForm')">Cancel</button>
         </fieldset>
     </form>
     <!-- Delete a CustomerRaffle entry from the database -->
@@ -95,7 +101,7 @@
             <br>
             <br>
             <button type="submit">Delete Customer Raffle</button>
-			<button type="button" onclick="cancelForm('#customerRaffleDeleteForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#customerRaffleDeleteForm')">Cancel</button>
         </fieldset>
     </form>
     <table>
@@ -112,34 +118,31 @@
             </tr>
         </thead>
         <tbody>
-		 		<!-- The for loop code is based on the CS 340 Flask Starter App -->
-                <!-- Source date: 3/8/25 -->
-                <!-- Adapted from: -->
-                <!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
-		  		<!-- access the dictionary data passed from the customer_raffle blueprint -->
-		  		<!-- iterate through the list of dictionaries -->
-				{% for customer_raffle in customers_raffles %}
-            	<tr>
-		  			<!-- place each column value in table cells -->
-					<td>{{ customer_raffle.customer_raffle_id }}</td>
-					<td>{{ customer_raffle.raffle_id}}</td>
-					<td>{{ customer_raffle.raffle_description}}</td>
-					<td>{{ customer_raffle.customer_id}}</td>
-					<td>{{ customer_raffle.name}}</td>
-					<td>{{ customer_raffle.won_raffle }}</td>
-	   				<!-- The JavaScript function implementations are original -->
-		  			<!-- pass the customer_raffle attributes to the edit form -->
-                	<td><button onclick="showCustomerRaffleUpdate(
-                        '{{customer_raffle['customer_raffle_id']}}', 
-                        '{{ customer_raffle['raffle_id']}}',
-                        '{{customer_raffle['customer_id']}}', 
-                        '{{customer_raffle['won_raffle']}}')">Edit</button></td>
-		  			<!-- pass the customer_raffle_id to the delete form -->
-                	<td><button onclick="showCustomerRaffleDelete(
-                        '{{ customer_raffle['customer_raffle_id']}}')">Delete</button></td>
-            	</tr>
-				{% endfor %}
-         </tbody>
+            <!-- access the dictionary data passed from the customer_raffle blueprint -->
+            <!-- iterate through the list of dictionaries -->
+            {% for customer_raffle in customers_raffles %}
+            <tr>
+                <!-- place each column value in table cells -->
+                <td>{{ customer_raffle.customer_raffle_id }}</td>
+                <td>{{ customer_raffle.raffle_id}}</td>
+                <td>{{ customer_raffle.raffle_description}}</td>
+                <td>{{ customer_raffle.customer_id}}</td>
+                <td>{{ customer_raffle.name}}</td>
+                <td>{{ customer_raffle.won_raffle }}</td>
+                <!-- The JavaScript function implementations are original -->
+                <!-- pass the customer_raffle attributes to the edit form -->
+                <td><button onclick="showCustomerRaffleUpdate(
+                        '{{ customer_raffle['customer_raffle_id'] }}', 
+                        '{{ customer_raffle['raffle_id'] }}',
+                        '{{ customer_raffle['customer_id'] }}', 
+                        '{{ customer_raffle['won_raffle'] }}')">Edit</button></td>
+                <!-- pass the customer_raffle_id to the delete form -->
+                <td><button onclick="showCustomerRaffleDelete(
+                        '{{ customer_raffle['customer_raffle_id'] }}')">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
+
 </html>

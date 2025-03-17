@@ -1,5 +1,10 @@
+<!-- The for loop code is based on the CS 340 Flask Starter App -->
+<!-- Source date: 3/1/25 -->
+<!-- Adapted from: -->
+<!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
 <html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +13,7 @@
     <script src="./static/js/main.js"></script>
     <script src="./static/js/sneakers.js"></script>
 </head>
+
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
     <nav>
@@ -45,7 +51,7 @@
             <br>
             <br>
             <button type="submit">Add Sneaker</button>
-			<button type="button" onclick="cancelForm('#sneakerAddForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#sneakerAddForm')">Cancel</button>
         </fieldset>
     </form>
     <!-- Update a Sneaker in the database -->
@@ -58,7 +64,7 @@
             <span id="sneakerIDUpdate"></span>
             <label for="sneakerBrandUpdate">Brand</label>
             <input type="text" name="sneakerBrandUpdate" value="" required>
-            <label for="sneakerModelUpdate" >Model Name</label>
+            <label for="sneakerModelUpdate">Model Name</label>
             <input type="text" name="sneakerModelUpdate" value="" required>
             <label for="sneakerSizeUpdate">Size</label>
             <input type="number" name="sneakerSizeUpdate" value="" required>
@@ -71,7 +77,7 @@
             <br>
             <br>
             <button type="submit">Update Sneaker</button>
-			<button type="button" onclick="cancelForm('#sneakerUpdateForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#sneakerUpdateForm')">Cancel</button>
         </fieldset>
     </form>
     <!-- Delete a Sneaker from the database -->
@@ -87,9 +93,9 @@
             <br>
             <br>
             <button type="submit">Delete Sneaker</button>
-			<button type="button" onclick="cancelForm('#sneakerDeleteForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#sneakerDeleteForm')">Cancel</button>
         </fieldset>
-    </form> 
+    </form>
     <table>
         <thead>
             <tr>
@@ -105,15 +111,11 @@
             </tr>
         </thead>
         <tbody>
-		 	<!-- The for loop code is based on the CS 340 Flask Starter App -->
-            <!-- Source date: 3/1/25 -->
-            <!-- Adapted from: -->
-            <!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
             <!-- access the dictionary data passed from the sneaker blueprint -->
-		  	<!-- iterate through the list of dictionaries -->
+            <!-- iterate through the list of dictionaries -->
             {% for sneaker in sneakers %}
             <tr>
-		  		<!-- place each column value in table cells -->
+                <!-- place each column value in table cells -->
                 <td>{{ sneaker.sneaker_id }}</td>
                 <td>{{ sneaker.brand }}</td>
                 <td>{{ sneaker.model_name }}</td>
@@ -121,14 +123,15 @@
                 <td>{{ sneaker.colorway }}</td>
                 <td>{{ sneaker.price }}</td>
                 <td>{{ sneaker.stock_count }}</td>
-	   			<!-- The JavaScript function implementations are original -->
+                <!-- The JavaScript function implementations are original -->
                 <!-- pass the sneaker object to the edit form -->
                 <td><button onclick='showSneakerUpdate({{ sneaker | tojson }})'>Edit</button></td>
-		  		<!-- pass the sneaker object to the delete form -->
+                <!-- pass the sneaker object to the delete form -->
                 <td><button onclick='showSneakerDelete({{ sneaker | tojson }})'>Delete</button></td>
             </tr>
             {% endfor %}
-         </tbody>
+        </tbody>
     </table>
 </body>
+
 </html>

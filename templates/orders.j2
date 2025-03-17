@@ -1,5 +1,10 @@
+<!-- The for loop code is based on the CS 340 Flask Starter App -->
+<!-- Source date: 3/8/25 -->
+<!-- Adapted from: -->
+<!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
 <html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +13,7 @@
     <script src="./static/js/main.js"></script>
     <script src="./static/js/orders.js"></script>
 </head>
+
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
     <nav>
@@ -33,7 +39,7 @@
             <label for="orderCustomerID">Customer</label>
             <select name="orderCustomerID" id="orderCustomerID">
                 {% for customer in customers %}
-                    <option value="{{ customer.customer_id }}">{{ customer.name }}</option>
+                <option value="{{ customer.customer_id }}">{{ customer.name }}</option>
                 {% endfor %}
             </select>
             <label for="orderDate">Purchase Date</label>
@@ -48,7 +54,7 @@
             <br>
             <br>
             <button type="submit">Add Order</button>
-			<button type="button" onclick="cancelForm('#orderAddForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#orderAddForm')">Cancel</button>
         </fieldset>
     </form>
     <!-- Update an Order in the database -->
@@ -77,7 +83,7 @@
             <br>
             <br>
             <button type="submit">Update Order</button>
-			<button type="button" onclick="cancelForm('#orderUpdateForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#orderUpdateForm')">Cancel</button>
         </fieldset>
     </form>
     <form method="POST" class="deleteForm" id="orderDeleteForm" style="display: none">
@@ -90,7 +96,7 @@
             <br>
             <br>
             <button type="submit">Delete Order</button>
-			<button type="button" onclick="cancelForm('#orderDeleteForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#orderDeleteForm')">Cancel</button>
         </fieldset>
     </form>
     <table>
@@ -107,35 +113,32 @@
             </tr>
         </thead>
         <tbody>
-                <!-- The for loop code is based on the CS 340 Flask Starter App -->
-                <!-- Source date: 3/8/25 -->
-                <!-- Adapted from: -->
-                <!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
-		  		<!-- access the dictionary data passed from the order blueprint -->
-		  		<!-- iterate through the list of dictionaries -->
-				{% for order in orders %}
-            	<tr>
-		  			<!-- place each column value in table cells -->
-					<td>{{ order.order_id }}</td>
-					<td>{{ order.customer_id}}</td>
-					<td>{{ order.name}}</td>
-					<td>{{ order.purchase_date}}</td>
-					<td>{{ order.total_price}}</td>
-                    <td>{{ order.entered_raffle}}</td>
-	   				<!-- The JavaScript function implementations are original -->
-		  			<!-- pass the order attributes to the edit form -->
-                	<td><button onclick="showOrderUpdate(
+            <!-- access the dictionary data passed from the order blueprint -->
+            <!-- iterate through the list of dictionaries -->
+            {% for order in orders %}
+            <tr>
+                <!-- place each column value in table cells -->
+                <td>{{ order.order_id }}</td>
+                <td>{{ order.customer_id}}</td>
+                <td>{{ order.name}}</td>
+                <td>{{ order.purchase_date}}</td>
+                <td>{{ order.total_price}}</td>
+                <td>{{ order.entered_raffle}}</td>
+                <!-- The JavaScript function implementations are original -->
+                <!-- pass the order attributes to the edit form -->
+                <td><button onclick="showOrderUpdate(
                         '{{ order['order_id'] }}',
                         '{{ order['customer_id'] }}',
                         '{{ order['purchase_date'] }}',
                         '{{ order['total_price'] }}',
                         '{{ order['entered_raffle'] }}')">Edit</button></td>
-		  			<!-- pass the order_id to the delete form -->
-                	<td><button onclick="showOrderDelete(
+                <!-- pass the order_id to the delete form -->
+                <td><button onclick="showOrderDelete(
                         '{{ order['order_id'] }}' )">Delete</button></td>
-            	</tr>
-				{% endfor %}
-         </tbody>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
+
 </html>

@@ -1,5 +1,10 @@
+<!-- The for loop code is based on the CS 340 Flask Starter App -->
+<!-- Source date: 3/8/25 -->
+<!-- Adapted from: -->
+<!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
 <html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +13,7 @@
     <script src="./static/js/main.js"></script>
     <script src="./static/js/drawings.js"></script>
 </head>
+
 <body>
     <h1>Eastern Beaver Sneaker Boutique</h1>
     <nav>
@@ -33,7 +39,7 @@
             <label for="drawingRaffleID">Raffle</label>
             <select name="drawingRaffleID" id="drawingRaffleID">
                 {% for raffle in raffles %}
-                    <option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_description'] }}</option>
+                <option value="{{ raffle['raffle_id'] }}">{{ raffle['raffle_description'] }}</option>
                 {% endfor %}
             </select>
             <label for="drawingDate">Draw Date</label>
@@ -51,7 +57,7 @@
             <br>
             <br>
             <button type="submit">Add Drawing</button>
-			<button type="button" onclick="cancelForm('#drawingAddForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#drawingAddForm')">Cancel</button>
         </fieldset>
     </form>
     <!-- Update a Drawing in the database -->
@@ -65,7 +71,7 @@
             <label for="drawingRaffleIDUpdate">Raffle</label>
             <select name="drawingRaffleIDUpdate" id="drawingRaffleIDUpdate">
                 {% for raffle in raffles %}
-                    <option value="{{ raffle.raffle_id}}">{{ raffle.raffle_description }}</option>
+                <option value="{{ raffle.raffle_id}}">{{ raffle.raffle_description }}</option>
                 {% endfor %}
             </select required>
             <label for="drawingDateUpdate">Draw Date</label>
@@ -83,7 +89,7 @@
             <br>
             <br>
             <button type="submit">Update Drawing</button>
-			<button type="button" onclick="cancelForm('#drawingUpdateForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#drawingUpdateForm')">Cancel</button>
         </fieldset>
     </form>
     <!-- Delete a Drawing from the database -->
@@ -97,7 +103,7 @@
             <br>
             <br>
             <button type="submit">Delete Drawing</button>
-			<button type="button" onclick="cancelForm('#drawingDeleteForm')">Cancel</button>
+            <button type="button" onclick="cancelForm('#drawingDeleteForm')">Cancel</button>
         </fieldset>
     </form>
     <table>
@@ -112,34 +118,31 @@
                 <th>Delete</th>
             </tr>
         </thead>
-         <tbody>
-		 		<!-- The for loop code is based on the CS 340 Flask Starter App -->
-                <!-- Source date: 3/8/25 -->
-                <!-- Adapted from: -->
-                <!-- https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/bsg_people_app/templates -->
-		  		<!-- access the dictionary data passed from the drawing blueprint -->
-		  		<!-- iterate through the list of dictionaries -->
-				{% for drawing in drawings %}
-            	<tr>
-		  			<!-- place each column value in table cells -->
-					<td>{{ drawing.drawing_id }}</td>
-					<td>{{ drawing.raffle_id}}</td>
-					<td>{{ drawing.raffle_description}}</td>
-					<td>{{ drawing.draw_date}}</td>
-					<td>{{ drawing.draw_day }}</td>
-	   				<!-- The JavaScript function implementations are original -->
-		  			<!-- pass the drawing attributes to the edit form -->
-                	<td><button onclick="showDrawingUpdate(
+        <tbody>
+            <!-- access the dictionary data passed from the drawing blueprint -->
+            <!-- iterate through the list of dictionaries -->
+            {% for drawing in drawings %}
+            <tr>
+                <!-- place each column value in table cells -->
+                <td>{{ drawing.drawing_id }}</td>
+                <td>{{ drawing.raffle_id}}</td>
+                <td>{{ drawing.raffle_description}}</td>
+                <td>{{ drawing.draw_date}}</td>
+                <td>{{ drawing.draw_day }}</td>
+                <!-- The JavaScript function implementations are original -->
+                <!-- pass the drawing attributes to the edit form -->
+                <td><button onclick="showDrawingUpdate(
                         '{{ drawing['drawing_id'] }}',
                         '{{ drawing['raffle_id'] }}',
                         '{{ drawing['draw_date'] }}',
                         '{{ drawing['draw_day'] }}')">Edit</button></td>
-		  			<!-- pass the drawing_id to the delete form -->
-                	<td><button onclick="showDrawingDelete(
+                <!-- pass the drawing_id to the delete form -->
+                <td><button onclick="showDrawingDelete(
                         '{{ drawing['drawing_id'] }}')">Delete</button></td>
-            	</tr>
-				{% endfor %}
-         </tbody>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
+
 </html>

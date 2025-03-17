@@ -22,13 +22,15 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
 app = Flask(__name__)
 
 """
-Citation for these functions:
+Citation for 'g' functions:
 Date: 3/9/25
 Modified from:
 https://flask.palletsprojects.com/en/stable/appcontext/
 and
 https://www.restack.io/p/flask-answer-persistent-database-connection
 """
+
+
 def get_db_connection():
     if "db_connection" not in g:
         g.db_connection = db.connect_to_database()
