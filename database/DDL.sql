@@ -1,6 +1,6 @@
 -- Amity Hill, Matthew Melnick
 -- Eastern Beavers (Group 15)
--- Data Definition Queries with sample data
+-- Data Definition Queries with sample data to initialize database for Step 6
 
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;

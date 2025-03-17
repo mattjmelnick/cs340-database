@@ -1,6 +1,6 @@
 -- Amity Hill, Matthew Melnick
 -- Eastern Beavers (Group 15)
--- Updated Data Manipulation Queries for Step 5
+-- Updated Data Manipulation Queries for Step 6
 -- Variables that are used to pass data from the backend are denoted with '~' in front of them
 
 -- SELECT Queries to Populate Tables on Initial GET Requests
